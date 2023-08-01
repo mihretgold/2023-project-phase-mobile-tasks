@@ -1,3 +1,7 @@
+/*
+  Task Manager class
+ */
+
 import 'task.dart';
 
 class TaskManager {

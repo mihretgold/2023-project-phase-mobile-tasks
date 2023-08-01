@@ -1,3 +1,7 @@
+/*
+  Task class
+ */
+
 class Task{
   String _title;
   String _description;
