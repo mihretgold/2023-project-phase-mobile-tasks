@@ -22,7 +22,8 @@ void main() {
 
     switch (choice) {
       case 1:
-        String title = getTitleFromUser('');
+        print('Enter task title:');
+        String title = stdin.readLineSync() ?? '';
 
         print('Enter task description:');
         String description = stdin.readLineSync() ?? '';
@@ -56,12 +57,14 @@ void main() {
         break;
 
       case 5:
-        String title = getTitleFromUser('');
+        print('Enter task title of task you want to edit:');
+        String title = stdin.readLineSync() ?? '';
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
           task.displayTask();
-          String newTitle = getTitleFromUser('');
+          print('Enter task title:');
+          String newTitle = stdin.readLineSync() ?? '';
 
           print('Enter task description:');
           String description = stdin.readLineSync() ?? '';
@@ -86,15 +89,15 @@ void main() {
         break;
 
       case 6:
-        String title = getTitleFromUser('');
+        print('Enter task title of task you want to delete:');
+        String title = stdin.readLineSync() ?? '';
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
           taskManager.delete(task);
         } else {
-          print("Task Not Found");
+          print("Task Noft Found");
         }
-        break;
 
       case 7:
         exit = true;
@@ -104,15 +107,4 @@ void main() {
         print("Please pick a number from 1 - 7");
     }
   }
-}
-
-String getTitleFromUser(String title) {
-  while (title.isEmpty) {
-    print('Enter task title of task:');
-    title = stdin.readLineSync() ?? '';
-    if (title.isEmpty) {
-      print('Task title cannot be empty. Please try again.');
-    }
-  }
-  return title;
 }
