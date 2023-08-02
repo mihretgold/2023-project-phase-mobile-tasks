@@ -22,14 +22,7 @@ void main() {
 
     switch (choice) {
       case 1:
-        String title = '';
-        while (title.isEmpty) {
-          print('Enter task title:');
-          title = stdin.readLineSync() ?? '';
-          if (title.isEmpty) {
-            print('Task title cannot be empty. Please try again.');
-          }
-        }
+        String title = getTitleFromUser('');
 
         print('Enter task description:');
         String description = stdin.readLineSync() ?? '';
@@ -63,26 +56,12 @@ void main() {
         break;
 
       case 5:
-        String title = '';
-        while (title.isEmpty) {
-          print('Please Enter a title to edit:');
-          title = stdin.readLineSync() ?? '';
-          if (title.isEmpty) {
-            print('Task title cannot be empty. Please try again.');
-          }
-        }
+        String title = getTitleFromUser('');
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
           task.displayTask();
-          String newTitle = '';
-          while (title.isEmpty) {
-            print('Enter Task Title:');
-            newTitle = stdin.readLineSync() ?? '';
-            if (newTitle.isEmpty) {
-              print('Task title cannot be empty. Please try again.');
-            }
-          }
+          String newTitle = getTitleFromUser('');
 
           print('Enter task description:');
           String description = stdin.readLineSync() ?? '';
@@ -107,21 +86,15 @@ void main() {
         break;
 
       case 6:
-        String title = '';
-        while (title.isEmpty) {
-          print('Enter task title of task you want to delete:');
-          title = stdin.readLineSync() ?? '';
-          if (title.isEmpty) {
-            print('Task title cannot be empty. Please try again.');
-          }
-        }
+        String title = getTitleFromUser('');
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
           taskManager.delete(task);
         } else {
-          print("Task Noft Found");
+          print("Task Not Found");
         }
+        break;
 
       case 7:
         exit = true;
@@ -131,4 +104,15 @@ void main() {
         print("Please pick a number from 1 - 7");
     }
   }
+}
+
+String getTitleFromUser(String title) {
+  while (title.isEmpty) {
+    print('Enter task title of task:');
+    title = stdin.readLineSync() ?? '';
+    if (title.isEmpty) {
+      print('Task title cannot be empty. Please try again.');
+    }
+  }
+  return title;
 }
