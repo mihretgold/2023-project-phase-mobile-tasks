@@ -22,8 +22,14 @@ void main() {
 
     switch (choice) {
       case 1:
-        print('Enter task title:');
-        String title = stdin.readLineSync() ?? '';
+        String title = '';
+        while (title.isEmpty) {
+          print('Enter task title:');
+          title = stdin.readLineSync() ?? '';
+          if (title.isEmpty) {
+            print('Task title cannot be empty. Please try again.');
+          }
+        }
 
         print('Enter task description:');
         String description = stdin.readLineSync() ?? '';
@@ -57,14 +63,26 @@ void main() {
         break;
 
       case 5:
-        print('Enter task title of task you want to edit:');
-        String title = stdin.readLineSync() ?? '';
+        String title = '';
+        while (title.isEmpty) {
+          print('Please Enter a title to edit:');
+          title = stdin.readLineSync() ?? '';
+          if (title.isEmpty) {
+            print('Task title cannot be empty. Please try again.');
+          }
+        }
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
           task.displayTask();
-          print('Enter task title:');
-          String newTitle = stdin.readLineSync() ?? '';
+          String newTitle = '';
+          while (title.isEmpty) {
+            print('Enter Task Title:');
+            newTitle = stdin.readLineSync() ?? '';
+            if (newTitle.isEmpty) {
+              print('Task title cannot be empty. Please try again.');
+            }
+          }
 
           print('Enter task description:');
           String description = stdin.readLineSync() ?? '';
@@ -89,8 +107,14 @@ void main() {
         break;
 
       case 6:
-        print('Enter task title of task you want to delete:');
-        String title = stdin.readLineSync() ?? '';
+        String title = '';
+        while (title.isEmpty) {
+          print('Enter task title of task you want to delete:');
+          title = stdin.readLineSync() ?? '';
+          if (title.isEmpty) {
+            print('Task title cannot be empty. Please try again.');
+          }
+        }
 
         Task? task = taskManager.searchTask(title);
         if (task != null) {
