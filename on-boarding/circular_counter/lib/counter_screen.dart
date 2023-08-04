@@ -55,7 +55,7 @@ class _CircularCounterState extends State<CircularCounter> {
             ElevatedButton.icon(
               onPressed: increament,
               icon: const Icon(Icons.add),
-              label: const Text(''),
+              label: const Text('Increament'),
             ),
             const SizedBox(
               width: 15,
@@ -63,7 +63,7 @@ class _CircularCounterState extends State<CircularCounter> {
             ElevatedButton.icon(
               onPressed: decreament,
               icon: const Center(child: Icon(Icons.minimize)),
-              label: const Text(''),
+              label: const Text('Decreament'),
             )
           ],
         )
