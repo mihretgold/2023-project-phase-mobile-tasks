@@ -2,10 +2,14 @@ import 'package:circular_counter/counter_screen.dart';
 import 'package:flutter/material.dart';
 
 class CircularCounterFrame extends StatelessWidget {
+  const CircularCounterFrame({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Counter App',
       home: Scaffold(
+        appBar: AppBar(title: const Center(child: Text('Counter App'))),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(colors: [
