@@ -1,3 +1,8 @@
+import 'package:circular_counter/picture2/description.dart';
+import 'package:circular_counter/picture2/due_date.dart';
+import 'package:circular_counter/picture2/name_text.dart';
+import 'package:circular_counter/picture2/new_task_item.dart';
+import 'package:circular_counter/picture2/title_frame.dart';
 import 'package:flutter/material.dart';
 
 class NewTask extends StatefulWidget {
@@ -68,181 +73,29 @@ class _NewTaskState extends State<NewTask> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 50, right: 15),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Main task name",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromRGBO(255, 127, 7, 1),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const TitleFrame(title: "Main task name"),
                   const SizedBox(
                     height: 5,
                   ),
-                  Container(
-                    width: 343,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromARGB(255, 195, 190, 190)
-                              .withOpacity(0.5), // Set the shadow color
-                          spreadRadius: 2, // Set the spread radius
-                          blurRadius: 5, // Set the blur radius
-                          offset: const Offset(0, 3), // Set the shadow offset
-                        ),
-                      ],
-                    ),
-                    child: const Card(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          child: Text(
-                            "UI/UX App Design",
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Color.fromARGB(255, 8, 4, 0),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-                  ),
+                  //
+                  const NewTaskItem(taskWidgets: NameText()),
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 50, right: 15),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Due Date",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromRGBO(255, 127, 7, 1),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  //
+                  const TitleFrame(title: "Due Date"),
                   const SizedBox(
                     height: 5,
                   ),
-                  Container(
-                    width: 343,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromARGB(255, 195, 190, 190)
-                              .withOpacity(0.5), // Set the shadow color
-                          spreadRadius: 2, // Set the spread radius
-                          blurRadius: 5, // Set the blur radius
-                          offset: const Offset(0, 3), // Set the shadow offset
-                        ),
-                      ],
-                    ),
-                    child: const Card(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "UI/UX App Design",
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Color.fromARGB(255, 8, 4, 0),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(
-                              Icons.calendar_month,
-                              color: Color.fromRGBO(255, 127, 7, 1),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  const NewTaskItem(taskWidgets: DueDate()),
                   const SizedBox(
                     height: 15,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 50, right: 15),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Description",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color.fromRGBO(255, 127, 7, 1),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  const TitleFrame(title: "Description"),
                   const SizedBox(
                     height: 5,
                   ),
-                  Container(
-                    width: 343,
-                    height: 85,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color.fromARGB(255, 195, 190, 190)
-                              .withOpacity(0.5), // Set the shadow color
-                          spreadRadius: 2, // Set the spread radius
-                          blurRadius: 5, // Set the blur radius
-                          offset: const Offset(0, 3), // Set the shadow offset
-                        ),
-                      ],
-                    ),
-                    child: const Card(
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "First i have to animate the logo and later",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromRGBO(14, 13, 13, 1),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "protyping my design. It's very important.",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  color: Color.fromRGBO(9, 9, 9, 1),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ]),
-                      ),
-                    ),
-                  ),
+                  const NewTaskItem(taskWidgets: Description()),
                   const SizedBox(
                     height: 60,
                   ),
