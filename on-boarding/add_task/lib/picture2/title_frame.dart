@@ -2,9 +2,8 @@ import 'package:circular_counter/picture2/new_task_item.dart';
 import 'package:flutter/material.dart';
 
 class TitleFrame extends StatelessWidget {
-  const TitleFrame({required this.title,super.key});
+  const TitleFrame({required this.title, super.key});
   final String title;
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class TitleFrame extends StatelessWidget {
             title,
             style: const TextStyle(
               fontSize: 20,
-              color: Color.fromRGBO(255, 127, 7, 1),
+              color: Color.fromARGB(255, 243, 140, 89),
               fontWeight: FontWeight.bold,
             ),
           ),

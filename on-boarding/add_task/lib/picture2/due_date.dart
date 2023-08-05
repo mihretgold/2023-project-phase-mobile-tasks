@@ -20,7 +20,7 @@ class DueDate extends StatelessWidget {
           ),
           Icon(
             Icons.calendar_month,
-            color: Color.fromRGBO(255, 127, 7, 1),
+            color: Color.fromARGB(255, 243, 140, 89),
           )
         ],
       ),

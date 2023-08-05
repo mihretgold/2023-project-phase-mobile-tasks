@@ -13,7 +13,7 @@ class NewTaskItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color.fromARGB(255, 195, 190, 190)
+            color: const Color.fromARGB(255, 221, 217, 217)
                 .withOpacity(0.5), // Set the shadow color
             spreadRadius: 2, // Set the spread radius
             blurRadius: 5, // Set the blur radius
@@ -22,6 +22,9 @@ class NewTaskItem extends StatelessWidget {
         ],
       ),
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
         child: taskWidgets,
       ),
     );

@@ -83,13 +83,13 @@ class _NewTaskState extends State<NewTask> {
                     height: 15,
                   ),
                   //
-                  const TitleFrame(title: "Due Date"),
+                  const TitleFrame(title: "Due date"),
                   const SizedBox(
                     height: 5,
                   ),
                   const NewTaskItem(taskWidgets: DueDate()),
                   const SizedBox(
-                    height: 15,
+                    height: 45,
                   ),
                   const TitleFrame(title: "Description"),
                   const SizedBox(
@@ -106,14 +106,14 @@ class _NewTaskState extends State<NewTask> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor:
-                                const Color.fromRGBO(255, 127, 7, 1),
+                                const Color.fromARGB(255, 243, 120, 58),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
                         onPressed: () {},
                         child: const Text(
                           "Add task",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 25,
                               fontFamily: "Inter",
                               fontWeight: FontWeight.bold),
                         ),
