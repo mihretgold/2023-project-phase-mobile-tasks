@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+Map<String, Color> colorMap = {
+  'red': Colors.red,
+  'green': Colors.green,
+  'yellow': Colors.yellow,
+};
+
 class TaskListFrame extends StatelessWidget {
   const TaskListFrame(
       {required this.letter,
@@ -89,13 +95,18 @@ class TaskListFrame extends StatelessWidget {
                   ),
                 ],
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(
-                    Icons.more_vert_sharp,
-                    color: Color.fromARGB(255, 243, 140, 89),
-                    size: 40,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 12, 7, 12),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: VerticalDivider(
+                        color: colorMap[color],
+                        thickness: 5,
+                      ),
+                    ),
                   ),
                 ],
               )

@@ -43,7 +43,7 @@ class TodoFrame extends StatelessWidget {
               text1: "UI/UX App",
               text2: "Design",
               date: "April. 29, 2023",
-              color: "red"),
+              color: "green"),
           const SizedBox(
             height: 7,
           ),
@@ -52,7 +52,7 @@ class TodoFrame extends StatelessWidget {
               text1: "View candidates'",
               text2: "",
               date: "April. 29, 2023",
-              color: "red"),
+              color: "yellow"),
           const SizedBox(
             height: 7,
           ),
