@@ -16,14 +16,6 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 
-To install and run the Todo App, please follow the steps below:
-
-Make sure you have Flutter and Dart installed on your machine. If not, please refer to the official Flutter installation guide: Flutter Installation
-
-Clone the repository from GitHub:
-
-
-git clone (https://github.com/mihretgold/2023-project-phase-mobile-tasks.git)
 
 ![Screenshot_1691230313](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/38412c2e-da1c-4e6d-9ab1-8749658c6027)
 ![Screenshot_1691230272](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/7cc87155-008b-4d78-996b-c52764010ae3)
@@ -32,6 +24,14 @@ git clone (https://github.com/mihretgold/2023-project-phase-mobile-tasks.git)
 ![Screenshot_1691298228](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/df1903c0-2806-47c1-8c94-866fd36467bd)
 ![Screenshot_1691298237](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/60d3b6fc-27bc-4361-9dea-fddb4cdfc0fc)
 
+To install and run the Todo App, please follow the steps below:
+
+Make sure you have Flutter and Dart installed on your machine. If not, please refer to the official Flutter installation guide: Flutter Installation
+
+Clone the repository from GitHub:
+
+
+git clone (https://github.com/mihretgold/2023-project-phase-mobile-tasks.git)
 
 Navigate to the project directory:
 
