@@ -33,17 +33,17 @@ git clone [https://github.com/Temesgenzewude/2023-project-phase-mobile-tasks/tre
 ![Screenshot_1691298237](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/60d3b6fc-27bc-4361-9dea-fddb4cdfc0fc)
 
 
-##Navigate to the project directory:
+Navigate to the project directory:
 
 -cd todo_mobile_app
 -git checkout -b mihret.navigation_task
 -git pull origin mihret.navigation_task
 
-##Fetch the dependencies:
+Fetch the dependencies:
 -flutter pub get
 
 -Connect your device or start an emulator.
 
-##Run the app:
+Run the app:
 -flutter run
 -The Todo App should now be running on your device or emulator.
