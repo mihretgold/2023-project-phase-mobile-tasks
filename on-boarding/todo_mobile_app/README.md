@@ -22,14 +22,16 @@ Make sure you have Flutter and Dart installed on your machine. If not, please re
 Clone the repository from GitHub:
 
 
-git clone https://github.com/Temesgenzewude/2023-project-phase-mobile-tasks/tree/main/on-boarding/building_layouts
+git clone [https://github.com/Temesgenzewude/2023-project-phase-mobile-tasks/tree/main/on-boarding/building_layouts](https://github.com/mihretgold/2023-project-phase-mobile-tasks.git)
 
+![Screenshot_1691230313](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/38412c2e-da1c-4e6d-9ab1-8749658c6027)
 Navigate to the project directory:
 
 
-cd building_layouts
-git checkout -b temesgen.navigation_task
-git pull origin temesgen.navigation_task
+cd todo_mobile_app
+
+git checkout -b mihret.navigation_task
+git pull origin mihret.navigation_task
 
 Fetch the dependencies:
 flutter pub get
