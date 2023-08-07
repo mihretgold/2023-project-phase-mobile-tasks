@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
 import 'package:todo_mobile_app/todo_list/task_list_frame.dart';
+import 'package:get/get.dart';
 
 class TodoFrame extends StatelessWidget {
   const TodoFrame({super.key});
@@ -69,21 +70,26 @@ class TodoFrame extends StatelessWidget {
           SizedBox(
             width: 256,
             height: 50,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFEE6F57),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5))),
-              onPressed: () {
-                Navigator.pushNamed(context, addTask);
+            child: GestureDetector(
+              onTap: () {
+                Get.to(() => addTask, transition: Transition.zoom);
               },
-              child: const Text(
-                "Create task",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.w700),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFEE6F57),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5))),
+                onPressed: () {
+                  Navigator.pushNamed(context, addTask);
+                },
+                child: const Text(
+                  "Create task",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ),

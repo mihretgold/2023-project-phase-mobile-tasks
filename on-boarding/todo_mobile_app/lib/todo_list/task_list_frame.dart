@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:todo_mobile_app/constants.dart';
 
 Map<String, Color> colorMap = {
@@ -38,87 +39,92 @@ class TaskListFrame extends StatelessWidget {
           ),
         ],
       ),
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context, taskDetail);
+      child: GestureDetector(
+        onTap: () {
+          Get.to(() => taskDetail, transition: Transition.zoom);
         },
-        style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, taskDetail);
+          },
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
             ),
           ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                letter,
-                style: const TextStyle(
-                  fontSize: 30,
-                  color: Color.fromARGB(255, 8, 4, 0),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  letter,
+                  style: const TextStyle(
+                    fontSize: 30,
+                    color: Color.fromARGB(255, 8, 4, 0),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 8, 0, 0),
-                    child: Text(
-                      text1,
+                const SizedBox(
+                  width: 5,
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 8, 0, 0),
+                      child: Text(
+                        text1,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 8, 4, 0),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      text2,
                       style: const TextStyle(
                         fontSize: 15,
                         color: Color.fromARGB(255, 8, 4, 0),
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  ),
-                  Text(
-                    text2,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      color: Color.fromARGB(255, 8, 4, 0),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
-              ),
-              const Spacer(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                    child: Text(
-                      date,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Color.fromARGB(255, 8, 4, 0),
+                    )
+                  ],
+                ),
+                const Spacer(),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
+                      child: Text(
+                        date,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 8, 4, 0),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: VerticalDivider(
-                        color: colorMap[color],
-                        thickness: 5,
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 12, 0, 12),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: VerticalDivider(
+                          color: colorMap[color],
+                          thickness: 5,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
