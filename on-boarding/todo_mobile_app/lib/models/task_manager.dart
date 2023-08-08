@@ -5,8 +5,12 @@
 import 'task.dart';
 
 class TaskManager {
-  List<Task> tasks;
-  TaskManager(this.tasks);
+  static List<Task> tasks = [];
+  TaskManager();
+
+  List<Task> get tasksList {
+    return tasks;
+  }
 
   void addTask(Task task) {
     tasks.add(task);

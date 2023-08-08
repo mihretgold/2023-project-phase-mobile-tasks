@@ -14,10 +14,10 @@ class TitleFrame extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 20,
-              color: Color.fromARGB(255, 243, 140, 89),
-              fontWeight: FontWeight.bold,
-            ),
+                fontSize: 20,
+                color: Color.fromARGB(255, 243, 140, 89),
+                fontWeight: FontWeight.bold,
+                overflow: TextOverflow.ellipsis),
           ),
         ],
       ),

@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 
 class NewTaskItem extends StatelessWidget {
-  const NewTaskItem({required this.taskWidgets, super.key});
-  final Widget taskWidgets;
+  const NewTaskItem(
+      {required this.keys,
+      required this.lines,
+      required this.controller,
+      Key? key})
+      : super(key: key);
+
+  final TextEditingController controller;
+  final int lines;
+  final String keys;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 343,
-      height: 70,
+      // width: 343,
+      // height: 70,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -21,13 +31,15 @@ class NewTaskItem extends StatelessWidget {
           ),
         ],
       ),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+      child: TextField(
+        key: Key(keys),
+        maxLines: lines,
+        controller: controller, // Disable text input
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(20),
         ),
-        child: taskWidgets,
       ),
-      //child: const TextField(),
     );
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
-import 'package:todo_mobile_app/new_task/description.dart';
+import 'package:todo_mobile_app/models/task.dart';
+import 'package:todo_mobile_app/models/task_manager.dart';
 import 'package:todo_mobile_app/new_task/due_date.dart';
-import 'package:todo_mobile_app/new_task/name_text.dart';
+// import 'package:todo_mobile_app/new_task/name_text.dart';
 import 'package:todo_mobile_app/new_task/new_task_item.dart';
 import 'package:todo_mobile_app/new_task/title_frame.dart';
 
@@ -14,6 +15,10 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
+  final TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _taskDescriptionController =
+      TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -92,7 +97,7 @@ class _NewTaskState extends State<NewTask> {
                     height: 5,
                   ),
                   //
-                  const NewTaskItem(taskWidgets: NameText()),
+                  NewTaskItem(keys: 'titleField' ,lines: 1, controller: _taskNameController),
                   const SizedBox(
                     height: 15,
                   ),
@@ -101,7 +106,7 @@ class _NewTaskState extends State<NewTask> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const NewTaskItem(taskWidgets: DueDate()),
+                  const DueDate(),
                   const SizedBox(
                     height: 45,
                   ),
@@ -109,7 +114,9 @@ class _NewTaskState extends State<NewTask> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const NewTaskItem(taskWidgets: Description()),
+                  NewTaskItem(
+                      keys: 'descriptionField',
+                      lines: 2, controller: _taskDescriptionController),
                   const SizedBox(
                     height: 60,
                   ),
@@ -127,7 +134,7 @@ class _NewTaskState extends State<NewTask> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '');
+                          addTask();
                         },
                         child: const Text(
                           "Add task",
@@ -146,5 +153,23 @@ class _NewTaskState extends State<NewTask> {
         ],
       ),
     );
+  }
+
+  void addTask() {
+    String taskName = _taskNameController.text;
+    String taskDescription = _taskDescriptionController.text;
+
+    if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
+      Task newTask = Task(taskName, taskDescription, DateTime.now(), false);
+
+      TaskManager taskManager = TaskManager();
+      taskManager.addTask(newTask);
+      taskManager.viewAllTasks();
+    } else {
+      debugPrint("No Data");
+    }
+
+    Navigator.pushNamed(context, viewTask,
+        arguments: {'title': taskName, 'description': taskDescription});
   }
 }

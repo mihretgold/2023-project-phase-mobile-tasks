@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
+// import 'package:todo_mobile_app/models/task_manager.dart';
 import 'package:todo_mobile_app/todo_list/to_do_frame.dart';
+// import 'package:todo_mobile_app/models/task.dart';
 
 class ViewToDoList extends StatelessWidget {
+  // List<Task> task = TaskManager.tasks;
   const ViewToDoList({required this.values, super.key});
   final Map<String, dynamic> values;
+  // final List<Task> tasks;
 
   @override
   Widget build(BuildContext context) {
-    String title = values['title'] ?? '';
+    // String title = values['title'] ?? '';
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
-            "Todo List $title",
-            style: const TextStyle(
+            "Todo List",
+            style: TextStyle(
               fontFamily: "Inter",
               fontWeight: FontWeight.w400,
               fontSize: 19,

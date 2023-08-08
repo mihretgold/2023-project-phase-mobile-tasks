@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
 import 'package:todo_mobile_app/task_detail/task_detail_frame.dart';
+// import 'package:todo_mobile_app/models/task.dart';
 
 class ViewTaskFrame extends StatelessWidget {
   const ViewTaskFrame({super.key});
-  // final String data;
+  // final List<Task> tasks;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +30,14 @@ class ViewTaskFrame extends StatelessWidget {
               size: 40,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, viewTask, arguments: {
+              Navigator.pushNamed(
+                context,
+                viewTask,
+                arguments: {
                   'title': 'Sample Title',
                   'description': 'Sample Description',
-                }, );
+                },
+              );
             },
           ),
         ),

@@ -8,25 +8,22 @@ class TodoFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: ListView(
         children: [
           Image.asset('assets/images/checkList.png'),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Tasks list",
-                  style: TextStyle(
-                      fontFamily: "Inter",
-                      fontWeight: FontWeight.bold,
-                      fontSize: 23),
-                ),
-              ],
-            ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "Tasks list",
+                style: TextStyle(
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23),
+              ),
+            ],
           ),
           const SizedBox(
             height: 12,
@@ -40,33 +37,34 @@ class TodoFrame extends StatelessWidget {
           const SizedBox(
             height: 7,
           ),
-          const TaskListFrame(
-              letter: "U",
-              text1: "UI/UX App",
-              text2: "Design",
-              date: "April. 29, 2023",
-              color: "green"),
-          const SizedBox(
-            height: 7,
-          ),
-          const TaskListFrame(
-              letter: "V",
-              text1: "View candidates'",
-              text2: "",
-              date: "April. 29, 2023",
-              color: "yellow"),
-          const SizedBox(
-            height: 7,
-          ),
-          const TaskListFrame(
-              letter: "F",
-              text1: "Football Cu",
-              text2: "Drybling",
-              date: "April. 29, 2023",
-              color: "red"),
-          const SizedBox(
-            height: 30,
-          ),
+          // for (Task task in tas)
+          // const TaskListFrame(
+          //     letter: "U",
+          //     text1: "UI/UX App",
+          //     text2: "Design",
+          //     date: "April. 29, 2023",
+          //     color: "green"),
+          // const SizedBox(
+          //   height: 7,
+          // ),
+          // const TaskListFrame(
+          //     letter: "V",
+          //     text1: "View candidates'",
+          //     text2: "",
+          //     date: "April. 29, 2023",
+          //     color: "yellow"),
+          // const SizedBox(
+          //   height: 7,
+          // ),
+          // const TaskListFrame(
+          //     letter: "F",
+          //     text1: "Football Cu",
+          //     text2: "Drybling",
+          //     date: "April. 29, 2023",
+          //     color: "red"),
+          // const SizedBox(
+          //   height: 30,
+          // ),
           SizedBox(
             width: 256,
             height: 50,
