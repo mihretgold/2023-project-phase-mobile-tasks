@@ -21,7 +21,7 @@ For help getting started with Flutter development, view the [online documentatio
 
 1. Test Task Listing
 
-```dart
+
 testWidgets('Test Task Listing', (WidgetTester tester) async {
   // Build our app and trigger a frame.
   await tester.pumpWidget(
@@ -35,7 +35,7 @@ testWidgets('Test Task Listing', (WidgetTester tester) async {
 
 2. Test Task Creation
 
-```dart
+
 testWidgets('Test task Creation', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -65,7 +65,7 @@ testWidgets('Test task Creation', (WidgetTester tester) async {
 
 3. Test onboarding page navigation
 
-```dart
+
 testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -82,7 +82,7 @@ testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
   });
 4. Add task displays correct UI
 
-```dart
+
 testWidgets('Add task displays correct UI', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -103,7 +103,7 @@ testWidgets('Add task displays correct UI', (WidgetTester tester) async {
 
 5. Test empty tasks
 
-```dart
+
 testWidgets('Test empty tasks', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
