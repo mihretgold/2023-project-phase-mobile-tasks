@@ -20,7 +20,7 @@ For help getting started with Flutter development, view the [online documentatio
 
 1. Set Due Date Feature:
 
-
+  ```dart
    void editTask() {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
@@ -75,7 +75,7 @@ For help getting started with Flutter development, view the [online documentatio
       
 2. Mark Tasks as Completed Feature:
 
-   
+  
   void complete() {
     TaskRepositorisImpl taskManager = TaskRepositorisImpl();
     taskManager.markComplete(widget.task);
@@ -105,8 +105,8 @@ For help getting started with Flutter development, view the [online documentatio
               ),
             )
 
-4. Error Handling and Either Type:
-
+3. Error Handling and Either Type:
+```dart
    
   @override
   Future<Either<Failure, Unit>> addTask(Tasks task) async {
