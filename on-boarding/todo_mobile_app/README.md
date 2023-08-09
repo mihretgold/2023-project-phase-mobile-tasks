@@ -20,8 +20,7 @@ For help getting started with Flutter development, view the [online documentatio
 
 1. Set Due Date Feature:
 ```
-function test() {
-  console.log(" void editTask() {
+void editTask() {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
     String taskDate = _taskDateController.text;
@@ -38,10 +37,8 @@ function test() {
     Navigator.pushNamed(context, viewTask,
         arguments: {'title': taskName, 'description': taskDescription});
   }
-");
-}
 ```
-
+```
   TextField(
         key: Key(widget.keys),
         maxLines: widget.lines,
@@ -74,10 +71,10 @@ function test() {
               }
             : null,
       )
-      
+  ```    
 2. Mark Tasks as Completed Feature:
 
-  
+  ```
   void complete() {
     TaskRepositorisImpl taskManager = TaskRepositorisImpl();
     taskManager.markComplete(widget.task);
@@ -85,6 +82,8 @@ function test() {
     Navigator.pushNamed(context, viewTask,
         arguments: {'title': '', 'description': ''});
   }
+```
+```
 
 
             ElevatedButton(
@@ -106,9 +105,9 @@ function test() {
                     fontWeight: FontWeight.bold),
               ),
             )
-
+```
 3. Error Handling and Either Type:
-```dart
+```
    
   @override
   Future<Either<Failure, Unit>> addTask(Tasks task) async {
@@ -120,7 +119,7 @@ function test() {
           TaskFailure(message: 'Failed to add task', type: e.runtimeType));
     }
   }
-
+```
           
 
 
@@ -131,7 +130,7 @@ function test() {
 
 1. Test Task Listing
 
-
+```
 testWidgets('Test Task Listing', (WidgetTester tester) async {
   // Build our app and trigger a frame.
   await tester.pumpWidget(
@@ -142,10 +141,11 @@ testWidgets('Test Task Listing', (WidgetTester tester) async {
 
   // Add your test assertions here
 });
+```
 
 2. Test Task Creation
 
-
+```
 testWidgets('Test task Creation', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -172,10 +172,10 @@ testWidgets('Test task Creation', (WidgetTester tester) async {
     expect(task.title, 'Task Title');
     expect(task.description, 'Task Description');
   });
-
+```
 3. Test onboarding page navigation
 
-
+```
 testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -190,9 +190,10 @@ testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
     // Verify that our counter starts at 0.
     expect(find.byType(ViewToDoList), findsOneWidget);
   });
+```
 4. Add task displays correct UI
 
-
+```
 testWidgets('Add task displays correct UI', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -209,11 +210,11 @@ testWidgets('Add task displays correct UI', (WidgetTester tester) async {
     expect(find.byType(TextField), findsNWidgets(2));
     expect(find.byType(ElevatedButton), findsOneWidget);
   });
-
+```
 
 5. Test empty tasks
 
-
+```
 testWidgets('Test empty tasks', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
@@ -228,7 +229,7 @@ testWidgets('Test empty tasks', (WidgetTester tester) async {
     expect(textField.controller!.text.isEmpty, isTrue);
   });
 
-
+```
 
 ## Installation
 
