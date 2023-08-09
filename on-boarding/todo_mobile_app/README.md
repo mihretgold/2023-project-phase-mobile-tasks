@@ -1,9 +1,5 @@
 # To Do Mobile App
 
-A new Flutter project.
-
-## Getting Started
-
 This project is a Todo Mobile app.
 
 ## Screenshots
