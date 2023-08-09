@@ -19,9 +19,8 @@ For help getting started with Flutter development, view the [online documentatio
 ## Update Flutter task 7 Part 1: TDD and Clean Architecture 
 
 1. Set Due Date Feature:
-
-  ```dart
-   void editTask() {
+function test() {
+  console.log(" void editTask() {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
     String taskDate = _taskDateController.text;
@@ -38,7 +37,9 @@ For help getting started with Flutter development, view the [online documentatio
     Navigator.pushNamed(context, viewTask,
         arguments: {'title': taskName, 'description': taskDescription});
   }
-
+");
+}
+ 
 
   TextField(
         key: Key(widget.keys),
