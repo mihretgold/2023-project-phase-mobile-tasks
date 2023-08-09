@@ -16,6 +16,105 @@ For help getting started with Flutter development, view the [online documentatio
 ## Screenshots
 
 ![Screenshot_1691230313](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/38412c2e-da1c-4e6d-9ab1-8749658c6027) ![Screenshot_1691230272](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/7cc87155-008b-4d78-996b-c52764010ae3) ![Screenshot_1691332883](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/6486d710-ea05-4eda-951e-f778444a3a3a) ![Screenshot_1691332890](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/59f2660b-fb9d-4fe6-90f4-24d318e27b4e) ![Screenshot_1691298228](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/df1903c0-2806-47c1-8c94-866fd36467bd) ![Screenshot_1691298237](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/60d3b6fc-27bc-4361-9dea-fddb4cdfc0fc)
+## Update Flutter task 7 Part 1: TDD and Clean Architecture 
+
+1. Set Due Date Feature:
+   void editTask() {
+    String taskName = _taskNameController.text;
+    String taskDescription = _taskDescriptionController.text;
+    String taskDate = _taskDateController.text;
+    bool status = widget.task.status;
+
+    DateTime parsedDate = DateTime.tryParse(taskDate) ?? DateTime.now();
+
+    if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
+      TaskRepositorisImpl taskManager = TaskRepositorisImpl();
+      taskManager.editTask(
+          widget.task, taskName, taskDescription, parsedDate, status);
+    }
+
+    Navigator.pushNamed(context, viewTask,
+        arguments: {'title': taskName, 'description': taskDescription});
+  }
+
+  TextField(
+        key: Key(widget.keys),
+        maxLines: widget.lines,
+        controller: widget.controller, // Disable text input
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.all(20),
+          suffixIcon: widget.setDate
+              ? const Icon(
+                  Icons.calendar_month,
+                  color: Color.fromRGBO(243, 140, 89, 1),
+                )
+              : null,
+        ),
+       
+        onTap: widget.setDate
+            ? () async {
+                DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2101),
+                );
+                if (pickedDate != null) {
+                  setState(() {
+                    widget.controller.text =
+                        DateFormat('yyyy-MM-dd').format(pickedDate);
+                  });
+                }
+              }
+            : null,
+      )
+      
+2. Mark Tasks as Completed Feature:
+  void complete() {
+    TaskRepositorisImpl taskManager = TaskRepositorisImpl();
+    taskManager.markComplete(widget.task);
+
+    Navigator.pushNamed(context, viewTask,
+        arguments: {'title': '', 'description': ''});
+  }
+
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              onPressed: () async {
+                complete();
+              },
+              child: const Text(
+                "Completed",
+                style: TextStyle(
+                    fontSize: 25,
+                    fontFamily: "Inter",
+                    fontWeight: FontWeight.bold),
+              ),
+            )
+
+3. Error Handling and Either Type:
+  @override
+  Future<Either<Failure, Unit>> addTask(Tasks task) async {
+    try {
+      tasks.add(task);
+      return const Right(unit);
+    } catch (e) {
+      return Left(
+          TaskFailure(message: 'Failed to add task', type: e.runtimeType));
+    }
+  }
+
+          
+
+
 ## Update Flutter task 6: Testing
 
 ![Screenshot (684)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/1742645e-84c7-481e-933e-e04c9acc20cf)
