@@ -19,6 +19,8 @@ For help getting started with Flutter development, view the [online documentatio
 ## Update Flutter task 7 Part 1: TDD and Clean Architecture 
 
 1. Set Due Date Feature:
+
+
    void editTask() {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
@@ -36,6 +38,7 @@ For help getting started with Flutter development, view the [online documentatio
     Navigator.pushNamed(context, viewTask,
         arguments: {'title': taskName, 'description': taskDescription});
   }
+
 
   TextField(
         key: Key(widget.keys),
@@ -71,6 +74,8 @@ For help getting started with Flutter development, view the [online documentatio
       )
       
 2. Mark Tasks as Completed Feature:
+
+   
   void complete() {
     TaskRepositorisImpl taskManager = TaskRepositorisImpl();
     taskManager.markComplete(widget.task);
@@ -100,7 +105,9 @@ For help getting started with Flutter development, view the [online documentatio
               ),
             )
 
-3. Error Handling and Either Type:
+4. Error Handling and Either Type:
+
+   
   @override
   Future<Either<Failure, Unit>> addTask(Tasks task) async {
     try {
