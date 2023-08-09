@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_mobile_app/new_task/new_task.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task.dart';
 // import 'package:todo_mobile_app/models/task.dart';
 
 class NewTaskFrame extends StatelessWidget {

@@ -2,13 +2,15 @@
   Task class
  */
 
-class Task {
+class Tasks {
+  static int _currentId = 0;
+  int id;
   String _title;
   String _description;
   DateTime _dueDate;
   bool _status;
 
-  Task(this._title, this._description, this._dueDate, this._status);
+  Tasks(this._title, this._description, this._dueDate, this._status) : id = ++ _currentId;
 
   set title(String title) {
     _title = title;
@@ -33,6 +35,10 @@ class Task {
   }
 
   bool get status => _status;
+
+  void markCompleted(){
+    _status = true;
+  }
 
   void displayTask() {
     print("Title:  $_title");

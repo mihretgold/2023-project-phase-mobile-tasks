@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_mobile_app/landing_page/to_do_frame.dart';
-import 'package:todo_mobile_app/new_task/new_task_frame.dart';
-import 'package:todo_mobile_app/task_detail/view_task_frame.dart';
-import 'package:todo_mobile_app/todo_list/view_todo_list.dart';
+import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/landing_page/to_do_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/task_detail/view_task_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/todo_list/view_todo_list.dart';
 
 class MyRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -20,7 +21,9 @@ class MyRoutes {
       case '/addTask':
         return MaterialPageRoute(builder: (context) => const NewTaskFrame());
       case '/taskDetail':
-        return MaterialPageRoute(builder: (context) => const ViewTaskFrame());
+        Tasks tasks = settings.arguments as Tasks;
+
+        return MaterialPageRoute(builder: (context) => ViewTaskFrame(tasks: tasks,));
     }
 
     return MaterialPageRoute<dynamic>(

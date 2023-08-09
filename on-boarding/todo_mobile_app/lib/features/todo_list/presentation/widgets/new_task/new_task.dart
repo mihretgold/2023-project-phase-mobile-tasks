@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
-import 'package:todo_mobile_app/models/task.dart';
-import 'package:todo_mobile_app/models/task_manager.dart';
-import 'package:todo_mobile_app/new_task/due_date.dart';
-// import 'package:todo_mobile_app/new_task/name_text.dart';
-import 'package:todo_mobile_app/new_task/new_task_item.dart';
-import 'package:todo_mobile_app/new_task/title_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
+import 'package:todo_mobile_app/features/todo_list/domain/repositories/task_repositorisImpl.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task_item.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/title_frame.dart';
 
 class NewTask extends StatefulWidget {
   const NewTask({Key? key}) : super(key: key);
@@ -18,6 +16,7 @@ class _NewTaskState extends State<NewTask> {
   final TextEditingController _taskNameController = TextEditingController();
   final TextEditingController _taskDescriptionController =
       TextEditingController();
+  final TextEditingController _taskDateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +96,12 @@ class _NewTaskState extends State<NewTask> {
                     height: 5,
                   ),
                   //
-                  NewTaskItem(keys: 'titleField' ,lines: 1, controller: _taskNameController),
+                  NewTaskItem(
+                    keys: 'titleField',
+                    lines: 1,
+                    controller: _taskNameController,
+                    setDate: false,
+                  ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -106,7 +110,12 @@ class _NewTaskState extends State<NewTask> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const DueDate(),
+                  NewTaskItem(
+                    keys: 'dateField',
+                    lines: 1,
+                    controller: _taskDateController,
+                    setDate: true,
+                  ),
                   const SizedBox(
                     height: 45,
                   ),
@@ -115,8 +124,11 @@ class _NewTaskState extends State<NewTask> {
                     height: 5,
                   ),
                   NewTaskItem(
-                      keys: 'descriptionField',
-                      lines: 2, controller: _taskDescriptionController),
+                    keys: 'descriptionField',
+                    lines: 2,
+                    controller: _taskDescriptionController,
+                    setDate: false,
+                  ),
                   const SizedBox(
                     height: 60,
                   ),
@@ -158,13 +170,15 @@ class _NewTaskState extends State<NewTask> {
   void addTask() {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
+    String taskDate = _taskDateController.text;
+    
+    DateTime parsedDate = DateTime.tryParse(taskDate) ?? DateTime.now() ;    
 
     if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
-      Task newTask = Task(taskName, taskDescription, DateTime.now(), false);
+      Tasks newTask = Tasks(taskName, taskDescription, parsedDate, false);
 
-      TaskManager taskManager = TaskManager();
+      TaskRepositorisImpl taskManager = TaskRepositorisImpl();
       taskManager.addTask(newTask);
-      taskManager.viewAllTasks();
     } else {
       debugPrint("No Data");
     }

@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:todo_mobile_app/constants.dart';
-// import 'package:todo_mobile_app/models/task_manager.dart';
-import 'package:todo_mobile_app/todo_list/to_do_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/task_detail/task_detail_frame.dart';
 // import 'package:todo_mobile_app/models/task.dart';
 
-class ViewToDoList extends StatelessWidget {
-  // List<Task> task = TaskManager.tasks;
-  const ViewToDoList({required this.values, super.key});
-  final Map<String, dynamic> values;
-  // final List<Task> tasks;
+class ViewTaskFrame extends StatelessWidget {
+  const ViewTaskFrame({required this.tasks, super.key});
+  final Tasks tasks;
+  
 
   @override
   Widget build(BuildContext context) {
-    // String title = values['title'] ?? '';
     return Scaffold(
       appBar: AppBar(
         title: const Center(
           child: Text(
-            "Todo List",
+            "Task Detail",
             style: TextStyle(
               fontFamily: "Inter",
               fontWeight: FontWeight.w400,
@@ -34,7 +32,14 @@ class ViewToDoList extends StatelessWidget {
               size: 40,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, home);
+              Navigator.pushNamed(
+                context,
+                viewTask,
+                arguments: {
+                  'title': 'Sample Title',
+                  'description': 'Sample Description',
+                },
+              );
             },
           ),
         ),
@@ -54,7 +59,7 @@ class ViewToDoList extends StatelessWidget {
           ),
         ],
       ),
-      body: const TodoFrame(),
+      body: TaskDetailFrame(task: tasks),
     );
   }
 }

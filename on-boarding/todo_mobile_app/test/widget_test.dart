@@ -10,12 +10,12 @@ import 'package:flutter_test/flutter_test.dart';
 // import 'package:todo_mobile_app/constants.dart';
 // import 'package:todo_mobile_app/landing_page/to_do_frame.dart';
 import 'package:todo_mobile_app/main.dart';
-import 'package:todo_mobile_app/new_task/new_task_frame.dart';
-import 'package:todo_mobile_app/models/task.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task_frame.dart';
+import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
 // import 'package:todo_mobile_app/new_task/new_task_frame.dart';
 
 // import 'package:todo_mobile_app/main.dart';
-import 'package:todo_mobile_app/todo_list/view_todo_list.dart';
+import 'package:todo_mobile_app/features/todo_list/presentation/widgets/todo_list/view_todo_list.dart';
 import 'package:todo_mobile_app/my_routes.dart';
 
 void main() {
@@ -23,7 +23,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
       const MaterialApp(
-        home: ViewToDoList(values: {'title':'', 'description':''}),
+        home: ViewToDoList(values: {'title': '', 'description': ''}),
       ),
     );
 
@@ -50,7 +50,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify the task object.
-    final task = Task('Task Title', 'Task Description', DateTime.now(), false);
+    final task = Tasks('Task Title', 'Task Description', DateTime.now(), false);
 
     // Verify that our counter starts at 0.
     expect(task.title, 'Task Title');
@@ -75,9 +75,7 @@ void main() {
   testWidgets('Add task displays correct UI', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      const MaterialApp(
-        home: NewTaskFrame()
-      ),
+      const MaterialApp(home: NewTaskFrame()),
     );
 
     // Verify that various text elements are found.
@@ -88,7 +86,6 @@ void main() {
     expect(find.byType(TextField), findsNWidgets(2));
     expect(find.byType(ElevatedButton), findsOneWidget);
   });
-
 
   testWidgets('Test empty tasks', (WidgetTester tester) async {
     // Build our app and trigger a frame.
@@ -103,6 +100,4 @@ void main() {
 
     expect(textField.controller!.text.isEmpty, isTrue);
   });
-
-
 }
