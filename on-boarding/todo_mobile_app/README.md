@@ -8,6 +8,139 @@ This project is a Todo Mobile app.
 | ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+## Update Flutter task 8 Part 1: TDD and Clean Architecture 
+
+1. Project Setup and Data Flow:
+     ```
+       todo_mobile_app/
+      ├── lib/
+      │   ├── core/
+      │   │   ├── entities/
+      │   │   │   ├── tasks.dart
+      │   │   ├── error/
+      │   │   │   ├── failure.dart
+      │   │   ├── usecases/
+      │   │   │   ├── usescases.dart
+      │   ├── features/
+      │   │   ├── todo_list/
+      │   │   │   ├── data/
+      │   │   │   │   ├── models/
+      │   │   │   │   │   ├── task_model.dart
+      │   │   │   ├── domain/
+      │   │   │   │   ├── repositories/
+      │   │   │   │   │   ├── todo_repository_contract.dart
+      │   │   │   │   ├── usecases/
+      │   │   │   │   │   ├── view_all_tasks.dart
+      │   │   │   │   │   ├── view_specific_task.dart
+      │   │   │   │   │   ├── add_task.dart
+      ├── test/
+      │   ├── core/
+      │   ├── features/
+      │   │   ├── todo_list/
+      │   │   │   ├── data/
+      │   │   │   │   ├── models/
+      │   │   │   │   │   ├── todo_model_test.dart
+      │   │   │   ├── domain/
+      │   │   │   │   ├── usecases/
+      │   │   │   │   │   ├── add_task_test.dart
+      │   │   │   │   │   ├── view_all_task_test.dart
+      │   │   │   │   │   ├── view_specific_task_test.dart
+    ```
+-Data Flow
+
+I. Domain Layer:
+  
+  - The domain layer, located under features/todo_list/domain, contains the business logic of the "Todo List" feature.
+  
+  - It consists of use cases (or interactors) defined in the usecases directory. Use cases encapsulate specific actions or operations that can be performed on the "Todo List" feature.
+  - For example, the ViewAllTasks use case represents the action of retrieving all tasks, while the AddTask use case represents the action of adding a new task.
+  - Use cases orchestrate the flow of data and apply business rules to operate on the entities.
+  - Use cases depend on repositories to fetch or store data.
+  
+II. Repository Layer:
+  
+
+  - The repository layer, located under features/todo_list/domain/repositories, defines interfaces (contracts) that provide access to the data sources.
+  - For example, the TodoRepositoryContract defines the methods that must be implemented by specific repositories.
+  - The use cases in the domain layer rely on these repository interfaces to fetch or store data.
+  - The actual implementations of the repositories are defined in the data layer.
+III. Data Layer:
+  
+  - The data layer, located under features/todo_list/data, is responsible for fetching and manipulating data.
+  - It consists of models (models directory) that represent the data entities used in -the "Todo List" feature, such as the TaskModel class.
+  - The data layer also includes repositories (repositories directory) that implement the repository interfaces defined in the domain layer.
+  - For example, the TodoRepository implements the TodoRepositoryContract.
+  - The repositories in the data layer interact with data sources to perform actual data retrieval or storage operations.
+    
+
+2. Implement Models:
+   - model class
+     ```  
+      class TaskModel extends Tasks {
+        TaskModel(String title, String description, DateTime dueDate, bool status)
+            : super(title, description, dueDate, status);
+      
+        factory TaskModel.fromJson(Map<String, dynamic> json) {
+          return TaskModel(json['title'], json['description'],
+              DateTime.parse(json['dueDate']), json['status']);
+        }
+      
+        Map<String, dynamic> toJson() {
+          return {
+            'title': title,
+            'description': description,
+            'dueDate': dueDate,
+            'status': status
+          };
+        }
+      }
+    ```
+  - model test
+    ![Screenshot (697)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/812d3116-8e5c-4fa9-9553-f63e4690884e)
+
+     ```
+      void main() {
+        final tTaskModel = TaskModel("Test Task", "This is an example task",
+            DateTime.parse("2023-08-10T12:34:56.789Z"), false);
+      
+        test('should be a subclass of Tasks entity', () async {
+          //assert
+          expect(tTaskModel, isA<Tasks>());
+        });
+      
+        test('should return a valid model from the JSON', () async {
+          //arrange
+      
+          final Map<String, dynamic> taskModel = json.decode(fixture('todo.json'));
+      
+          // act
+          final result = TaskModel.fromJson(taskModel);
+      
+          //assert
+          expect(result, isA<TaskModel>());
+          expect(result.title, tTaskModel.title);
+          expect(result.description, tTaskModel.description);
+          expect(result.dueDate, tTaskModel.dueDate);
+          expect(result.status, tTaskModel.status);
+        });
+      
+        test('should return a JSON map containing the proper data', () async {
+          // act
+          final result = tTaskModel.toJson();
+      
+          //assert
+          final expectedMap = {
+            "title": "Test Task",
+            "description": 'This is an example task',
+            "dueDate": DateTime.parse('2023-08-10T12:34:56.789Z'),
+            "status": false,
+          };
+          expect(result, expectedMap);
+        });
+      }
+
+     ```
+
 ## Update Flutter task 7 Part 2: TDD and Clean Architecture 
 
 1. Entities:
@@ -141,7 +274,8 @@ class Tasks {
       ```
 3. UseCases Testing:
    
-   ![Screenshot (695)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/974ec30f-3f0f-4f86-9be7-63270577adc0)
+  ![Screenshot (696)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/af191a45-36e2-455a-8905-2077a6cd723f)
+
 
    -Add task Test
    ```
@@ -174,7 +308,7 @@ class Tasks {
     }
 
    ```
-- View Task Test
+- View All Task Test
    ```
    class MockTaskRepository extends Mock implements TaskRepository {}
 
@@ -210,6 +344,42 @@ class Tasks {
       });
     }
    ```
+- View Specific Task Test
+  ```
+  class MockTaskRepository extends Mock implements TaskRepository {}
+    @GenerateMocks([Tasks])
+    void main() {
+      group('ViewSpecificTaskUseCase', () {
+        late ViewSpecificTask usecase;
+        late MockTaskRepository mockTaskRepository;
+        late int id;
+        late Tasks tTask;
+    
+        setUp(() {
+          mockTaskRepository = MockTaskRepository();
+          usecase = ViewSpecificTask(mockTaskRepository);
+          id = 1;
+          tTask = Tasks('Test Title', 'Test description', DateTime.now(), false);
+        });
+    
+        test('should Get a specific task from repository', () async {
+          // Arrange
+          when(mockTaskRepository.searchTask(id))
+              .thenAnswer((_) async => Right(tTask));
+    
+          //Act
+          final result = await usecase(Params(id));
+    
+          //Assert
+          expect(result, Right(tTask));
+          verify(mockTaskRepository.searchTask(id));
+          verifyNoMoreInteractions(mockTaskRepository);
+        });
+      });
+    }
+  ```
+  
+   
    
 
 
