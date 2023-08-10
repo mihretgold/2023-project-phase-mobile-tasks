@@ -10,7 +10,8 @@ class Tasks {
   DateTime _dueDate;
   bool _status;
 
-  Tasks(this._title, this._description, this._dueDate, this._status) : id = ++ _currentId;
+  Tasks(this._title, this._description, this._dueDate, this._status)
+      : id = ++_currentId;
 
   set title(String title) {
     _title = title;
@@ -36,14 +37,7 @@ class Tasks {
 
   bool get status => _status;
 
-  void markCompleted(){
+  void markCompleted() {
     _status = true;
-  }
-
-  void displayTask() {
-    print("Title:  $_title");
-    print("Description:  $_description");
-    print("Due Date:  $_dueDate");
-    print("Status:  $_status");
   }
 }
