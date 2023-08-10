@@ -1,7 +1,6 @@
-import 'dart:async';
+import 'package:dartz/dartz.dart';
+import 'package:todo_mobile_app/core/error/failures.dart';
 
-abstract class UseCase<Output, Input>{
-  Future<Output> call(Input input);
+abstract class UseCase<Type, Params> {
+  Future<Either<Failure, Type>> call(Params params);
 }
-
-class NoParams {}

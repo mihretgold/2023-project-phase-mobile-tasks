@@ -114,17 +114,7 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-          ]),
-          // SizedBox(
-          //   width: 190,
-          //   height: 45,
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-
-          //     ],
-          //   ),
-          // ),
+          ],),
           const SizedBox(
             height: 30,
           ),

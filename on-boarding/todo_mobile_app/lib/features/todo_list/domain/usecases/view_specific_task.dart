@@ -4,24 +4,25 @@ import 'package:todo_mobile_app/core/usecases/usecases.dart';
 import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
 import 'package:todo_mobile_app/features/todo_list/domain/repositories/task_repositories.dart';
 
-class AddTask implements UseCase<Unit, Params> {
+class ViewSpecificTask implements UseCase<Tasks, Params> {
   final TaskRepository repository;
 
-  AddTask(this.repository);
+  ViewSpecificTask(this.repository);
 
   @override
-  Future<Either<Failure, Unit>> call(Params params) async {
+  Future<Either<Failure, Tasks>> call(Params params) async {
     try {
-      await repository.addTask(params.task);
-      return const Right(unit);
+      final task = await repository.searchTask(params.id);
+      return task;
     } catch (e) {
-      return Left(
-          TaskFailure(message: 'Failed to retrieve task', type: e.runtimeType));
+      return Left(TaskFailure(
+          message: 'Failed to retrieve task', type: e.runtimeType));
     }
   }
 }
 
 class Params {
-  final Tasks task;
-  const Params(this.task);
+  final int id;
+  const Params(this.id);
 }
+
