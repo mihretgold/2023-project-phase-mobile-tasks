@@ -61,7 +61,12 @@ class Tasks {
 2. UseCases:
    ```    
     abstract class UseCase<Type, Params> {
-      Future<Either<Failure, Type>> call(Params params);
+    Future<Either<Failure, Type>?> call(Params params);
+    }
+    
+    class NoParams extends Equatable {
+      @override
+      List<Object?> get props => [];
     }
 
    ```
@@ -75,18 +80,10 @@ class Tasks {
           ViewAllTask(this.repository);
         
           @override
-          Future<Either<Failure, List<Tasks>>> call(NoParams params) async {
-            try {
-              final tasks = await repository.viewAllTasks();
-              return tasks;
-            } catch (e) {
-              return Left(TaskFailure(
-                  message: 'Failed to retrieve tasks', type: e.runtimeType));
-            }
+          Future<Either<Failure, List<Tasks>>?> call(NoParams params) async {
+           return await repository.viewAllTasks();
           }
         }
-        
-        class NoParams {}
 
     ```
 - View Specific Tasks
@@ -97,7 +94,7 @@ class Tasks {
           ViewSpecificTask(this.repository);
         
           @override
-          Future<Either<Failure, Tasks>> call(Params params) async {
+          Future<Either<Failure, Tasks>?> call(Params params) async {
             try {
               final task = await repository.searchTask(params.id);
               return task;
@@ -130,7 +127,7 @@ class Tasks {
               return const Right(unit);
             } catch (e) {
               return Left(
-                  TaskFailure(message: 'Failed to retrieve task', type:             
+                  TaskFailure(message: 'Failed to retrieve task', type: 
                   e.runtimeType));
             }
           }
@@ -142,6 +139,78 @@ class Tasks {
         }
 
       ```
+3. UseCases Testing:
+   
+   ![Screenshot (695)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/974ec30f-3f0f-4f86-9be7-63270577adc0)
+
+   -Add task Test
+   ```
+   class MockTaskRepository extends Mock implements TaskRepository {}
+
+    @GenerateMocks([Tasks])
+    void main() {
+      late AddTask usecase;
+      late MockTaskRepository mockTaskRepository;
+      late Tasks tTasks;
+    
+      setUp(() {
+        mockTaskRepository = MockTaskRepository();
+        usecase = AddTask(mockTaskRepository);
+        tTasks = Tasks("Test", "Mock Testing", DateTime.now(), false);
+      });
+    
+      test('should add task', () async {
+        //arrange
+        when(mockTaskRepository.addTask(tTasks))
+            .thenAnswer((_) async => const Right(unit));
+        //act
+        final result = await usecase(Params(tTasks));
+    
+        //assert
+        expect(result, const Right(unit));
+        verify(mockTaskRepository.addTask(tTasks));
+        verifyNoMoreInteractions(mockTaskRepository);
+      });
+    }
+
+   ```
+- View Task Test
+   ```
+   class MockTaskRepository extends Mock implements TaskRepository {}
+
+    @GenerateMocks([Tasks])
+    void main() {
+      group('ViewAllTaskUseCase', () {
+        late ViewAllTask usecase;
+        late MockTaskRepository mockTaskRepository;
+        late List<Tasks> tTask;
+    
+        setUp(() {
+          mockTaskRepository = MockTaskRepository();
+          usecase = ViewAllTask(mockTaskRepository);
+          tTask = [
+            Tasks('Test Title', 'Test description', DateTime.now(), false),
+            Tasks('Test2 Title', 'Test2 description', DateTime.now(), true),
+          ];
+        });
+    
+        test('should Get a list of tasks from repository', () async {
+          // Arrange
+          when(mockTaskRepository.viewAllTasks())
+              .thenAnswer((_) async => Right(tTask));
+    
+          //Act
+          final result = await usecase(NoParams());
+    
+          //Assert
+          expect(result, Right(tTask));
+          verify(mockTaskRepository.viewAllTasks());
+          verifyNoMoreInteractions(mockTaskRepository);
+        });
+      });
+    }
+   ```
+   
 
 
 ## Update Flutter task 7 Part 1: TDD and Clean Architecture 
