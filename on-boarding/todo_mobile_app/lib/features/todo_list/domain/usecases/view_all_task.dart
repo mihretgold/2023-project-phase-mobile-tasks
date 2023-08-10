@@ -10,15 +10,9 @@ class ViewAllTask implements UseCase<List<Tasks>, NoParams> {
   ViewAllTask(this.repository);
 
   @override
-  Future<Either<Failure, List<Tasks>>> call(NoParams params) async {
-    try {
-      final tasks = await repository.viewAllTasks();
-      return tasks;
-    } catch (e) {
-      return Left(TaskFailure(
-          message: 'Failed to retrieve tasks', type: e.runtimeType));
-    }
+  Future<Either<Failure, List<Tasks>>?> call(NoParams params) async {
+   return await repository.viewAllTasks();
   }
 }
 
-class NoParams {}
+

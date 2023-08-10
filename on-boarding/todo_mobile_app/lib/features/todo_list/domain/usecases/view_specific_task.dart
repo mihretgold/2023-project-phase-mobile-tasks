@@ -10,7 +10,7 @@ class ViewSpecificTask implements UseCase<Tasks, Params> {
   ViewSpecificTask(this.repository);
 
   @override
-  Future<Either<Failure, Tasks>> call(Params params) async {
+  Future<Either<Failure, Tasks>?> call(Params params) async {
     try {
       final task = await repository.searchTask(params.id);
       return task;

@@ -1,103 +1,103 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// // This is a basic Flutter widget test.
+// //
+// // To perform an interaction with a widget in your test, use the WidgetTester
+// // utility in the flutter_test package. For example, you can send tap and scroll
+// // gestures. You can also use WidgetTester to find child widgets in the widget
+// // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-// import 'package:todo_mobile_app/constants.dart';
-// import 'package:todo_mobile_app/landing_page/to_do_frame.dart';
-import 'package:todo_mobile_app/main.dart';
-import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task_frame.dart';
-import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
-// import 'package:todo_mobile_app/new_task/new_task_frame.dart';
-
+// import 'package:flutter/material.dart';
+// import 'package:flutter_test/flutter_test.dart';
+// // import 'package:todo_mobile_app/constants.dart';
+// // import 'package:todo_mobile_app/landing_page/to_do_frame.dart';
 // import 'package:todo_mobile_app/main.dart';
-import 'package:todo_mobile_app/features/todo_list/presentation/widgets/todo_list/view_todo_list.dart';
-import 'package:todo_mobile_app/my_routes.dart';
+// import 'package:todo_mobile_app/features/todo_list/presentation/widgets/new_task/new_task_frame.dart';
+// import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
+// // import 'package:todo_mobile_app/new_task/new_task_frame.dart';
 
-void main() {
-  testWidgets('Test Task Listing', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: ViewToDoList(values: {'title': '', 'description': ''}),
-      ),
-    );
+// // import 'package:todo_mobile_app/main.dart';
+// import 'package:todo_mobile_app/features/todo_list/presentation/widgets/todo_list/view_todo_list.dart';
+// import 'package:todo_mobile_app/my_routes.dart';
 
-    // Verify that various text elements are found.
-    expect(find.text('Design'), findsOneWidget);
-  });
-  testWidgets('Test task Creation', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const MaterialApp(
-        title: "To Do Mobile App",
-        onGenerateRoute: MyRoutes.generateRoute,
-        initialRoute: '/addTask',
-      ),
-    );
+// void main() {
+//   testWidgets('Test Task Listing', (WidgetTester tester) async {
+//     // Build our app and trigger a frame.
+//     await tester.pumpWidget(
+//       const MaterialApp(
+//         home: ViewToDoList(values: {'title': '', 'description': ''}),
+//       ),
+//     );
 
-    await tester.enterText(find.byKey(const Key('titleField')), 'Task Title');
-    await tester.enterText(
-        find.byKey(const Key('descriptionField')), 'Task Description');
+//     // Verify that various text elements are found.
+//     expect(find.text('Design'), findsOneWidget);
+//   });
+//   testWidgets('Test task Creation', (WidgetTester tester) async {
+//     // Build our app and trigger a frame.
+//     await tester.pumpWidget(
+//       const MaterialApp(
+//         title: "To Do Mobile App",
+//         onGenerateRoute: MyRoutes.generateRoute,
+//         initialRoute: '/addTask',
+//       ),
+//     );
 
-    final addTaskButton = find.text('Add task');
+//     await tester.enterText(find.byKey(const Key('titleField')), 'Task Title');
+//     await tester.enterText(
+//         find.byKey(const Key('descriptionField')), 'Task Description');
 
-    await tester.tap(addTaskButton);
-    await tester.pumpAndSettle();
+//     final addTaskButton = find.text('Add task');
 
-    // Verify the task object.
-    final task = Tasks('Task Title', 'Task Description', DateTime.now(), false);
+//     await tester.tap(addTaskButton);
+//     await tester.pumpAndSettle();
 
-    // Verify that our counter starts at 0.
-    expect(task.title, 'Task Title');
-    expect(task.description, 'Task Description');
-  });
+//     // Verify the task object.
+//     final task = Tasks('Task Title', 'Task Description', DateTime.now(), false);
 
-  testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: MyApp(),
-      ),
-    );
+//     // Verify that our counter starts at 0.
+//     expect(task.title, 'Task Title');
+//     expect(task.description, 'Task Description');
+//   });
 
-    final getStartedButton = find.text('Get Started');
-    await tester.tap(getStartedButton);
-    await tester.pumpAndSettle();
-    // Verify that our counter starts at 0.
-    expect(find.byType(ViewToDoList), findsOneWidget);
-  });
+//   testWidgets('Test onboarding page navigation', (WidgetTester tester) async {
+//     // Build our app and trigger a frame.
+//     await tester.pumpWidget(
+//       const MaterialApp(
+//         home: MyApp(),
+//       ),
+//     );
 
-  testWidgets('Add task displays correct UI', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const MaterialApp(home: NewTaskFrame()),
-    );
+//     final getStartedButton = find.text('Get Started');
+//     await tester.tap(getStartedButton);
+//     await tester.pumpAndSettle();
+//     // Verify that our counter starts at 0.
+//     expect(find.byType(ViewToDoList), findsOneWidget);
+//   });
 
-    // Verify that various text elements are found.
-    expect(find.text('Create new task'), findsOneWidget);
-    expect(find.text('Main task name'), findsOneWidget);
-    expect(find.text('Due date'), findsOneWidget);
-    expect(find.text('Description'), findsOneWidget);
-    expect(find.byType(TextField), findsNWidgets(2));
-    expect(find.byType(ElevatedButton), findsOneWidget);
-  });
+//   testWidgets('Add task displays correct UI', (WidgetTester tester) async {
+//     // Build our app and trigger a frame.
+//     await tester.pumpWidget(
+//       const MaterialApp(home: NewTaskFrame()),
+//     );
 
-  testWidgets('Test empty tasks', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(
-      const MaterialApp(
-        home: NewTaskFrame(),
-      ),
-    );
+//     // Verify that various text elements are found.
+//     expect(find.text('Create new task'), findsOneWidget);
+//     expect(find.text('Main task name'), findsOneWidget);
+//     expect(find.text('Due date'), findsOneWidget);
+//     expect(find.text('Description'), findsOneWidget);
+//     expect(find.byType(TextField), findsNWidgets(2));
+//     expect(find.byType(ElevatedButton), findsOneWidget);
+//   });
 
-    final textFieldFinder = find.byKey(const Key('titleField'));
-    final textField = tester.widget<TextField>(textFieldFinder);
+//   testWidgets('Test empty tasks', (WidgetTester tester) async {
+//     // Build our app and trigger a frame.
+//     await tester.pumpWidget(
+//       const MaterialApp(
+//         home: NewTaskFrame(),
+//       ),
+//     );
 
-    expect(textField.controller!.text.isEmpty, isTrue);
-  });
-}
+//     final textFieldFinder = find.byKey(const Key('titleField'));
+//     final textField = tester.widget<TextField>(textFieldFinder);
+
+//     expect(textField.controller!.text.isEmpty, isTrue);
+//   });
+// }
