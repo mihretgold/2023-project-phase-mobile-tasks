@@ -3,8 +3,147 @@
 This project is a Todo Mobile app.
 
 ## Screenshots
+| ![onboarding](ScreenShots/onboarding.png) | ![add_task](ScreenShots/add_task.png)|
+| ---------------------- | ---------------------- |
+| ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
+| ---------------------- | ---------------------- |
+| ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+## Update Flutter task 7 Part 2: TDD and Clean Architecture 
 
-![Screenshot_1691230313](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/38412c2e-da1c-4e6d-9ab1-8749658c6027) ![Screenshot_1691230272](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/7cc87155-008b-4d78-996b-c52764010ae3) ![Screenshot_1691332883](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/6486d710-ea05-4eda-951e-f778444a3a3a) ![Screenshot_1691332890](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/59f2660b-fb9d-4fe6-90f4-24d318e27b4e) ![Screenshot_1691298228](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/df1903c0-2806-47c1-8c94-866fd36467bd) ![Screenshot_1691298237](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/60d3b6fc-27bc-4361-9dea-fddb4cdfc0fc)
+1. Entities:
+```
+class Tasks {
+  static int _currentId = 0;
+  int id;
+  String _title;
+  String _description;
+  DateTime _dueDate;
+  bool _status;
+
+  Tasks(this._title, this._description, this._dueDate, this._status) : id = ++ _currentId;
+
+  set title(String title) {
+    _title = title;
+  }
+
+  String get title => _title;
+
+  set description(String description) {
+    _description = description;
+  }
+
+  String get description => _description;
+
+  set dueDate(DateTime dueDate) {
+    _dueDate = dueDate;
+  }
+
+  DateTime get dueDate => _dueDate;
+
+  set status(bool status) {
+    _status = status;
+  }
+
+  bool get status => _status;
+
+  void markCompleted(){
+    _status = true;
+  }
+
+  void displayTask() {
+    print("Title:  $_title");
+    print("Description:  $_description");
+    print("Due Date:  $_dueDate");
+    print("Status:  $_status");
+  }
+}
+```
+2. UseCases:
+   ```    
+    abstract class UseCase<Type, Params> {
+      Future<Either<Failure, Type>> call(Params params);
+    }
+
+   ```
+   
+ - View All Tasks
+      ```
+
+        class ViewAllTask implements UseCase<List<Tasks>, NoParams> {
+          final TaskRepository repository;
+        
+          ViewAllTask(this.repository);
+        
+          @override
+          Future<Either<Failure, List<Tasks>>> call(NoParams params) async {
+            try {
+              final tasks = await repository.viewAllTasks();
+              return tasks;
+            } catch (e) {
+              return Left(TaskFailure(
+                  message: 'Failed to retrieve tasks', type: e.runtimeType));
+            }
+          }
+        }
+        
+        class NoParams {}
+
+    ```
+- View Specific Tasks
+    ```
+        class ViewSpecificTask implements UseCase<Tasks, Params> {
+          final TaskRepository repository;
+        
+          ViewSpecificTask(this.repository);
+        
+          @override
+          Future<Either<Failure, Tasks>> call(Params params) async {
+            try {
+              final task = await repository.searchTask(params.id);
+              return task;
+            } catch (e) {
+              return Left(TaskFailure(
+                  message: 'Failed to retrieve task', type: e.runtimeType));
+            }
+          }
+        }
+        
+        class Params {
+          final int id;
+          const Params(this.id);
+        }
+
+
+      ```
+- Create New Tasks
+  
+      ```
+        class AddTask implements UseCase<Unit, Params> {
+          final TaskRepository repository;
+        
+          AddTask(this.repository);
+        
+          @override
+          Future<Either<Failure, Unit>> call(Params params) async {
+            try {
+              await repository.addTask(params.task);
+              return const Right(unit);
+            } catch (e) {
+              return Left(
+                  TaskFailure(message: 'Failed to retrieve task', type:             
+                  e.runtimeType));
+            }
+          }
+        }
+        
+        class Params {
+          final Tasks task;
+          const Params(this.task);
+        }
+
+      ```
+
+
 ## Update Flutter task 7 Part 1: TDD and Clean Architecture 
 
 1. Set Due Date Feature:
