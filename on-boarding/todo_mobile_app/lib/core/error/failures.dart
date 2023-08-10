@@ -17,3 +17,11 @@ class TaskFailure extends Failure {
   const TaskFailure({required String message, required Type type})
       : super(message: message, type: type);
 }
+class ServerFailure extends Failure {
+  const ServerFailure({required String message, required Type type})
+      : super(message: message, type: type);
+}
+class CacheFailure extends Failure {
+  const CacheFailure({required String message, required Type type})
+      : super(message: message, type: type);
+}
