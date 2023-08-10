@@ -8,6 +8,111 @@ This project is a Todo Mobile app.
 | ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+## Update Flutter task 8 Part 2: TDD and Clean Architecture 
+
+1. Contract and Repository:
+   
+   -Implement a contract that defines the methods a repository must fulfill
+   
+        ```
+        class TaskRepositorisImpl implements TaskRepository {
+            final TaskRemoteDataSource remoteDataSource;
+            final TaskLocalDataSource localDataSource;
+            final NetworkInfo networkInfo;
+          
+            TaskRepositorisImpl(
+                {required this.remoteDataSource,
+                required this.localDataSource,
+                required this.networkInfo});
+          
+            @override
+            Future<Either<Failure, Unit>>? addTask(Tasks task) {
+              // TODO: implement addTask
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, Unit>>? delete(Tasks task) {
+              // TODO: implement delete
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, Unit>>? editTask(Tasks task, String title,
+                String description, DateTime dueDate, bool status) {
+              // TODO: implement editTask
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, Unit>>? markComplete(Tasks task) {
+              // TODO: implement markComplete
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, Tasks>>? searchTask(int id) {
+              // TODO: implement searchTask
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, List<Tasks>>>? viewAllTasks() {
+              // TODO: implement viewAllTasks
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, List<Tasks>>>? viewCompletedTasks() {
+              // TODO: implement viewCompletedTasks
+              throw UnimplementedError();
+            }
+          
+            @override
+            Future<Either<Failure, List<Tasks>>>? viewPendingTasks() {
+              // TODO: implement viewPendingTasks
+              throw UnimplementedError();
+            }
+          }
+        ```
+   - Create interfaces or abstract classes for repository dependencies, such as remote and local data sources.
+I. Remote Data
+     ```
+     abstract class TaskRemoteDataSource {
+       Future<Unit>? addTask(Tasks task);
+     
+       Future<List<Tasks>>? viewAllTasks();
+     
+       Future<List<Tasks>>? viewCompletedTasks();
+     
+       Future< List<Tasks>>? viewPendingTasks();
+     
+       Future<Tasks>? searchTask(int id);
+     
+       Future<Unit>? editTask(Tasks task, String title,
+           String description, DateTime dueDate, bool status);
+     
+       Future<Unit>? delete(Tasks task);
+       Future< Unit>? markComplete(Tasks task);
+     }
+     ```
+II. Local Data
+   
+   ```
+   abstract class TaskLocalDataSource{
+       Future<Tasks> getLastTitle();
+       Future<void> cacheTask(Tasks task);
+     }
+   ```
+III. Network
+   
+   ```
+   abstract class NetworkInfo{
+       Future<bool> get isConnected;
+     }
+   ```
+
+
 ## Update Flutter task 8 Part 1: TDD and Clean Architecture 
 
 1. Project Setup and Data Flow:
