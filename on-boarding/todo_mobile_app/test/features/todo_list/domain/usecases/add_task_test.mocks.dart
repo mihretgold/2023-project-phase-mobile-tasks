@@ -112,12 +112,4 @@ class MockTasks extends _i1.Mock implements _i2.Tasks {
         ),
         returnValueForMissingStub: null,
       );
-  @override
-  void displayTask() => super.noSuchMethod(
-        Invocation.method(
-          #displayTask,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
 }
