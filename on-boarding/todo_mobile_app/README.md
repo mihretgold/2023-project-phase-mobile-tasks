@@ -8,6 +8,120 @@ This project is a Todo Mobile app.
 | ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+
+
+## Update Flutter task 9 Part 1: TDD and Clean Architecture (Repository Implementation) 
+
+
+- Set up a basic structure for your repository, and you're implementing all the logic at this stage from repository contracts from the domain layer .
+
+   ```
+      class TaskRepositorisImpl implements TaskRepository {
+        final TaskRemoteDataSource remoteDataSource;
+        final TaskLocalDataSource localDataSource;
+        final NetworkInfo networkInfo;
+        TaskRepositorisImpl(
+            {required this.remoteDataSource,
+            required this.localDataSource,
+            required this.networkInfo});
+      
+        @override
+        Future<Either<Failure, Unit>> addTask(Tasks task) async {
+          try {
+            await remoteDataSource.addTask(task);
+            return const Right(unit);
+          } catch (e) {
+            return Left(
+                TaskFailure(message: 'Failed to add task', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, List<Tasks>>>? viewAllTasks() async {
+          try {
+            final tasks = await remoteDataSource.viewAllTasks();
+            return Right(tasks);
+          } catch (e) {
+            return Left(TaskFailure(
+                message: 'Failed to view all tasks', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, List<Tasks>>> viewCompletedTasks() async {
+          try {
+            final completedTasks = await remoteDataSource.viewCompletedTasks();
+            return Right(completedTasks);
+          } catch (e) {
+            return Left(TaskFailure(
+                message: 'Failed to view completed tasks', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, List<Tasks>>> viewPendingTasks() async {
+          try {
+            final pendingTasks = await remoteDataSource.viewPendingTasks();
+            return Right(pendingTasks);
+          } catch (e) {
+            return Left(TaskFailure(
+                message: 'Failed to view pending tasks', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, Tasks>> searchTask(int taskId) async {
+          networkInfo.isConnected;
+          try {
+            final task = await remoteDataSource.searchTask(taskId);
+            return Right(task);
+          } catch (e) {
+            return Left(
+                TaskFailure(message: 'Failed to search task', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, Unit>> editTask(
+          Tasks task,
+          String title,
+          String description,
+          DateTime dueDate,
+          bool status,
+        ) async {
+          try {
+            await remoteDataSource.editTask(
+                task, title, description, dueDate, status);
+            return const Right(unit);
+          } catch (e) {
+            return Left(
+                TaskFailure(message: 'Failed to edit task', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, Unit>> delete(Tasks task) async {
+          try {
+            await remoteDataSource.delete(task);
+            return const Right(unit);
+          } catch (e) {
+            return Left(
+                TaskFailure(message: 'Failed to delete task', type: e.runtimeType));
+          }
+        }
+      
+        @override
+        Future<Either<Failure, Unit>> markComplete(Tasks task) async {
+          try {
+            await remoteDataSource.delete(task);
+            return const Right(unit);
+          } catch (e) {
+            return Left(TaskFailure(
+                message: 'Failed to mark task as completed', type: e.runtimeType));
+          }
+        }
+      }
+  ```
 ## Update Flutter task 8 Part 2: TDD and Clean Architecture 
 
 1. Contract and Repository:
