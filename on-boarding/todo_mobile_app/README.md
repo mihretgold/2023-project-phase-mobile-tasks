@@ -10,7 +10,7 @@ This project is a Todo Mobile app.
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
 
 
-## Update Flutter task 9 Part 1: TDD and Clean Architecture (Repository Implementation) 
+## Update Flutter Task 9 Part 1: TDD and Clean Architecture (Repository Implementation) 
 
 
 - Set up a basic structure for your repository, and you're implementing all the logic at this stage from repository contracts from the domain layer .
