@@ -8,6 +8,102 @@ This project is a Todo Mobile app.
 | ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+
+## Update Flutter Task 10 Part 1: TDD and Clean Architecture (Local DataSource) 
+ 1) Implement the Local Data Source Class
+    ```
+      const CACHED_TASK = 'CACHED_TASK';
+      
+      class TaskLocalDataSourceImpl implements TaskLocalDataSource {
+        final SharedPreferences sharedPreferences;
+      
+        TaskLocalDataSourceImpl({required this.sharedPreferences});
+      
+        @override
+        Future<Tasks>? getLastTask() {
+          final jsonString = sharedPreferences.getString(CACHED_TASK);
+      
+          if (jsonString != null) {
+            return Future.value(TaskModel.fromJson(json.decode(jsonString)));
+          } else {
+            throw CacheException();
+          }
+        }
+      
+        @override
+        Future<void>? cacheTask(TaskModel task) {
+          sharedPreferences.setString(CACHED_TASK, json.encode(task.toJson()));
+        }
+      }
+    ```
+2) Testing
+    ```
+      @GenerateMocks([SharedPreferences], customMocks: [ MockSpec<SharedPreferences>(as: #MockSharedPreferencesForTest,),])
+     
+     void main(){
+       late TaskLocalDataSourceImpl dataSource;
+       late MockSharedPreferences mockSharedPreferences;
+     
+       setUp(() {
+         mockSharedPreferences = MockSharedPreferences();
+         dataSource = TaskLocalDataSourceImpl(sharedPreferences: mockSharedPreferences);
+       });
+     
+       group('getLastTask', () { 
+         final tTaskModel = TaskModel.fromJson(json.decode(fixture('todo_cached.json')));
+     
+         test('should return Tasks from SharedPreferences when there is one in the cache', () async {
+           // arrange
+           when(mockSharedPreferences.getString(any)).thenReturn(fixture('todo_cached.json'));
+     
+           // act
+           final result = await dataSource.getLastTask();
+         
+           // assert
+           verify(mockSharedPreferences.getString(CACHED_TASK));
+           expect(result, equals(tTaskModel));
+     
+     
+         });
+         test('should throw a CacheException when there is not a chached value', () async {
+           // arrange
+           when(mockSharedPreferences.getString(any)).thenReturn(null);
+     
+           // act
+           final call = dataSource.getLastTask;
+         
+           // assert
+           expect(() => call(), throwsA(const TypeMatcher<CacheException>()));
+     
+     
+         });
+     
+       });
+     
+       group('cacheTask', () { 
+         final tTaskModel = TaskModel(id: 1, title: 'title', description: 'description', dueDate: DateTime.parse("2023-08-10T12:34:56.789Z"), status: false);
+     
+         test('should call SharedPreferences to cache the data', () async {
+           
+           // arrange
+     
+           when(mockSharedPreferences.setString(any, any))
+               .thenAnswer((_) => Future.value(true));
+           // act
+           await dataSource.cacheTask(tTaskModel);
+     
+           // assert
+           final expectedJsonString = json.encode(tTaskModel.toJson());
+           verify(mockSharedPreferences.setString(CACHED_TASK, expectedJsonString,));
+     
+     
+         });
+     
+       });
+     
+     }
+   ```
+
 ## Update Flutter Task 9 Part 2: TDD and Clean Architecture (Network Info) 
  1) Create the NetworkInfo Class
     ```
