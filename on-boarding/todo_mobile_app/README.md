@@ -8,6 +8,81 @@ This project is a Todo Mobile app.
 | ![home](ScreenShots/home.png) | ![home2](ScreenShots/home2.png)|
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
+## Update Flutter Task 9 Part 2: TDD and Clean Architecture (Network Info) 
+ 1) Create the NetworkInfo Class
+    ```
+       abstract class NetworkInfo {
+        Future<bool>? get isConnected;
+      }
+      
+      class NetworkInfoImpl implements NetworkInfo{
+        final InternetConnectionChecker connectionChecker;
+      
+        NetworkInfoImpl(this.connectionChecker);
+      
+        @override
+        Future<bool>? get isConnected => connectionChecker.hasConnection;
+      
+      }
+    ```
+    - Test
+      ```
+         @GenerateMocks([InternetConnectionChecker])
+         void main() {
+           late NetworkInfoImpl networkInfoImpl;
+           late MockInternetConnectionChecker mockInternetConnection;
+         
+           setUp(() {
+             mockInternetConnection = MockInternetConnectionChecker();
+         
+             networkInfoImpl = NetworkInfoImpl(mockInternetConnection);
+           });
+         
+           group('isConnected', () {
+             test(
+                 'shouds forward the call the call to the InternectConnectionChecker.hasConnection',
+                 () {
+               // arrange
+               final tHasConnectionFuture = Future.value(true);
+               when(mockInternetConnection.hasConnection)
+                   .thenAnswer((_) => tHasConnectionFuture);
+         
+               // act
+               final result = networkInfoImpl.isConnected;
+         
+               // assert
+               verify(mockInternetConnection.hasConnection);
+               expect(result, tHasConnectionFuture);
+         
+             });
+           });
+         }
+      ```
+   ![Screenshot (699)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/9030f701-d0f4-4d33-a26c-88f078e124af)
+
+ 2) Use NetworkInfo in the Repository
+    ```
+     final TaskRemoteDataSource remoteDataSource;
+     final TaskLocalDataSource localDataSource;
+     final NetworkInfo networkInfo;
+     TaskRepositorisImpl(
+         {required this.remoteDataSource,
+         required this.localDataSource,
+         required this.networkInfo});
+     @override
+     Future<Either<Failure, Tasks>>? searchTask(int taskId) async {
+       networkInfo.isConnected;
+       try {
+         final task = await remoteDataSource.searchTask(taskId);
+         return Right(task!);
+       } catch (e) {
+         return Left(
+             TaskFailure(message: 'Failed to search task', type: e.runtimeType));
+       }
+     }
+    
+    ```
+
 
 
 ## Update Flutter Task 9 Part 1: TDD and Clean Architecture (Repository Implementation) 
