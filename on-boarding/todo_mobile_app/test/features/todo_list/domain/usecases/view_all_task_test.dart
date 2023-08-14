@@ -21,8 +21,13 @@ void main() {
       mockTaskRepository = MockTaskRepository();
       usecase = ViewAllTask(mockTaskRepository);
       tTask = [
-        Tasks('Test Title', 'Test description', DateTime.now(), false),
-        Tasks('Test2 Title', 'Test2 description', DateTime.now(), true),
+        Tasks(id: 1, title : 'Test Title', description : 'Test description', dueDate : DateTime.now(), status : false),
+        Tasks(
+            id: 2,
+            title: 'Test2 Title',
+            description: 'Test2 description',
+            dueDate: DateTime.now(),
+            status: true),
       ];
     });
 

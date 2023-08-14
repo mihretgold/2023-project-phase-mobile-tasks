@@ -17,7 +17,7 @@ void main() {
   setUp(() {
     mockTaskRepository = MockTaskRepository();
     usecase = AddTask(mockTaskRepository);
-    tTasks = Tasks("Test", "Mock Testing", DateTime.now(), false);
+    tTasks = Tasks(id : 1, title : "Test", description: "Mock Testing", dueDate : DateTime.now(), status : false);
   });
 
   test('should add task', () async {

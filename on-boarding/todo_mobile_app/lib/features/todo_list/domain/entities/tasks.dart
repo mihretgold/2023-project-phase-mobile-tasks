@@ -2,42 +2,30 @@
   Task class
  */
 
-class Tasks {
-  static int _currentId = 0;
-  int id;
-  String _title;
-  String _description;
-  DateTime _dueDate;
-  bool _status;
+import 'package:equatable/equatable.dart';
+import 'package:todo_mobile_app/features/todo_list/data/models/task_model.dart';
 
-  Tasks(this._title, this._description, this._dueDate, this._status)
-      : id = ++_currentId;
+class Tasks extends Equatable {
+  final int id;
+  final String title;
+  final String description;
+  final DateTime dueDate;
+  final bool status;
 
-  set title(String title) {
-    _title = title;
-  }
+  const Tasks(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.dueDate,
+      required this.status});
 
-  String get title => _title;
+  @override
+  List<Object?> get props => [id, title, description, dueDate, status];
 
-  set description(String description) {
-    _description = description;
-  }
-
-  String get description => _description;
-
-  set dueDate(DateTime dueDate) {
-    _dueDate = dueDate;
-  }
-
-  DateTime get dueDate => _dueDate;
-
-  set status(bool status) {
-    _status = status;
-  }
-
-  bool get status => _status;
-
-  void markCompleted() {
-    _status = true;
-  }
+  TaskModel toModel() => TaskModel(
+      id: id,
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      status: status);
 }

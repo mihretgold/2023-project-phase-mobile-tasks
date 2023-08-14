@@ -171,11 +171,11 @@ class _NewTaskState extends State<NewTask> {
     String taskName = _taskNameController.text;
     String taskDescription = _taskDescriptionController.text;
     String taskDate = _taskDateController.text;
-    
-    DateTime parsedDate = DateTime.tryParse(taskDate) ?? DateTime.now() ;    
+
+    DateTime parsedDate = DateTime.tryParse(taskDate) ?? DateTime.now();
 
     if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
-      Tasks newTask = Tasks(taskName, taskDescription, parsedDate, false);
+      Tasks newTask = Tasks(id:1, title : taskName, description : taskDescription, dueDate : parsedDate, status : false);
 
       TaskRepositorisImpl taskManager = TaskRepositorisImpl();
       taskManager.addTask(newTask);

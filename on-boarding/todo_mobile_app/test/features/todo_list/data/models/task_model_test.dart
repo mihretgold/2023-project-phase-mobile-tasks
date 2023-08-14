@@ -7,8 +7,8 @@ import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
 import '../../../../fixtures/fixture_reader.dart';
 
 void main() {
-  final tTaskModel = TaskModel("Test Task", "This is an example task",
-      DateTime.parse("2023-08-10T12:34:56.789Z"), false);
+  final tTaskModel = TaskModel(id : 1, title : "Test Task", description : "This is an example task",
+      dueDate : DateTime.parse("2023-08-10T12:34:56.789Z"), status : false);
 
   test('should be a subclass of Tasks entity', () async {
     //assert
@@ -25,6 +25,7 @@ void main() {
 
     //assert
     expect(result, isA<TaskModel>());
+    expect(result.id, tTaskModel.id);
     expect(result.title, tTaskModel.title);
     expect(result.description, tTaskModel.description);
     expect(result.dueDate, tTaskModel.dueDate);
@@ -37,6 +38,7 @@ void main() {
 
     //assert
     final expectedMap = {
+      "id": 1,
       "title": "Test Task",
       "description": 'This is an example task',
       "dueDate": DateTime.parse('2023-08-10T12:34:56.789Z'),

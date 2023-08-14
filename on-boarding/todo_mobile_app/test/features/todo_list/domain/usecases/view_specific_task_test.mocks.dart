@@ -42,47 +42,15 @@ class MockTasks extends _i1.Mock implements _i2.Tasks {
         returnValue: 0,
       ) as int);
   @override
-  set id(int? _id) => super.noSuchMethod(
-        Invocation.setter(
-          #id,
-          _id,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
-  set title(String? title) => super.noSuchMethod(
-        Invocation.setter(
-          #title,
-          title,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   String get title => (super.noSuchMethod(
         Invocation.getter(#title),
         returnValue: '',
       ) as String);
   @override
-  set description(String? description) => super.noSuchMethod(
-        Invocation.setter(
-          #description,
-          description,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   String get description => (super.noSuchMethod(
         Invocation.getter(#description),
         returnValue: '',
       ) as String);
-  @override
-  set dueDate(DateTime? dueDate) => super.noSuchMethod(
-        Invocation.setter(
-          #dueDate,
-          dueDate,
-        ),
-        returnValueForMissingStub: null,
-      );
   @override
   DateTime get dueDate => (super.noSuchMethod(
         Invocation.getter(#dueDate),
@@ -92,24 +60,13 @@ class MockTasks extends _i1.Mock implements _i2.Tasks {
         ),
       ) as DateTime);
   @override
-  set status(bool? status) => super.noSuchMethod(
-        Invocation.setter(
-          #status,
-          status,
-        ),
-        returnValueForMissingStub: null,
-      );
-  @override
   bool get status => (super.noSuchMethod(
         Invocation.getter(#status),
         returnValue: false,
       ) as bool);
   @override
-  void markCompleted() => super.noSuchMethod(
-        Invocation.method(
-          #markCompleted,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+  List<Object?> get props => (super.noSuchMethod(
+        Invocation.getter(#props),
+        returnValue: <Object?>[],
+      ) as List<Object?>);
 }

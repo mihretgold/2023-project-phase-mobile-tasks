@@ -21,7 +21,7 @@ void main() {
       mockTaskRepository = MockTaskRepository();
       usecase = ViewSpecificTask(mockTaskRepository);
       id = 1;
-      tTask = Tasks('Test Title', 'Test description', DateTime.now(), false);
+      tTask =  Tasks(id: 1, title : 'Test Title', description : 'Test description', dueDate : DateTime.now(), status : false);
     });
 
     test('should Get a specific task from repository', () async {

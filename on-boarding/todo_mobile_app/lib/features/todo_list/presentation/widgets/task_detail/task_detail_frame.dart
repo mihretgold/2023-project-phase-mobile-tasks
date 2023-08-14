@@ -72,49 +72,52 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
           const SizedBox(
             height: 30,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onPressed: () async {
+                  complete();
+                },
+                child: const Text(
+                  "Completed",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              onPressed: () async {
-                complete();
-              },
-              child: const Text(
-                "Completed",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.bold),
+              const SizedBox(
+                width: 5,
               ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 243, 120, 58),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 243, 120, 58),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                onPressed: () async {
+                  editTask();
+                },
+                child: const Text(
+                  "Edit task",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: "Inter",
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              onPressed: () async {
-                editTask();
-              },
-              child: const Text(
-                "Edit task",
-                style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: "Inter",
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-          ],),
+            ],
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -130,11 +133,15 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
     bool status = widget.task.status;
 
     DateTime parsedDate = DateTime.tryParse(taskDate) ?? DateTime.now();
-
+    Tasks task = Tasks(
+        id: 1,
+        title: taskName,
+        description: taskDescription,
+        dueDate: parsedDate,
+        status: status);
     if (taskName.isNotEmpty && taskDescription.isNotEmpty) {
       TaskRepositorisImpl taskManager = TaskRepositorisImpl();
-      taskManager.editTask(
-          widget.task, taskName, taskDescription, parsedDate, status);
+      taskManager.editTask(task);
     }
 
     Navigator.pushNamed(context, viewTask,

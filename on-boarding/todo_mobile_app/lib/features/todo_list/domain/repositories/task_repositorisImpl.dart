@@ -63,17 +63,14 @@ class TaskRepositorisImpl implements TaskRepository {
 
   @override
   Future<Either<Failure, Unit>> editTask(
-    Tasks task,
-    String title,
-    String description,
-    DateTime dueDate,
-    bool status,
+     Tasks task
   ) async {
     try {
-      task.title = title;
-      task.description = description;
-      task.dueDate = dueDate;
-      task.status = status;
+      for(var index = 0; index <= tasks.length; index++){
+        if ( tasks[index].id == task.id){
+          tasks[index] = task;
+        } 
+      }
       return const Right(unit);
     } catch (e) {
       return Left(
@@ -95,7 +92,11 @@ class TaskRepositorisImpl implements TaskRepository {
   @override
   Future<Either<Failure, Unit>> markComplete(Tasks task) async {
     try {
-      task.markCompleted();
+       for (var index = 0; index <= tasks.length; index++) {
+        if (tasks[index].id == task.id) {
+          tasks[index] = task;
+        }
+      }
       return const Right(unit);
     } catch (e) {
       return Left(TaskFailure(

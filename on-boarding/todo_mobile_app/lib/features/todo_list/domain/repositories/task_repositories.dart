@@ -12,8 +12,7 @@ abstract class TaskRepository {
 
   Future<Either<Failure, Tasks>>? searchTask(int id);
 
-  Future<Either<Failure, Unit>>? editTask(Tasks task, String title,
-      String description, DateTime dueDate, bool status);
+  Future<Either<Failure, Unit>>? editTask(Tasks task);
 
   Future<Either<Failure, Unit>>? delete(Tasks task);
   Future<Either<Failure, Unit>>? markComplete(Tasks task);

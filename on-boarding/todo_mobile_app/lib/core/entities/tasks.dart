@@ -1,17 +1,18 @@
+import 'package:todo_mobile_app/features/todo_list/data/models/task_model.dart';
+
 class Tasks {
-  static int _currentId = 0;
-  int id;
-  String title;
-  String description;
-  DateTime dueDate;
-  bool status;
+  final int id;
+  final String title;
+  final String description;
+  final DateTime dueDate;
+  final bool status;
 
-  Tasks(this.title, this.description, this.dueDate, this.status)
-      : id = ++_currentId;
-
-  void markCompleted() {
-    status = true;
-  }
+  const Tasks(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.dueDate,
+      required this.status});
 
   @override
   bool operator ==(Object other) =>
@@ -31,4 +32,11 @@ class Tasks {
       description.hashCode ^
       dueDate.hashCode ^
       status.hashCode;
+
+  TaskModel toModel() => TaskModel(
+      id: id,
+      title: title,
+      description: description,
+      dueDate: dueDate,
+      status: status);
 }

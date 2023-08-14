@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:todo_mobile_app/core/platform/network_info.dart';
+import 'package:todo_mobile_app/core/network/network_info.dart';
 import 'package:todo_mobile_app/features/todo_list/data/datasources/task_local_data_source.dart';
 import 'package:todo_mobile_app/features/todo_list/data/datasources/task_remote_data_source.dart';
 import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart';
@@ -18,7 +18,7 @@ class TaskRepositorisImpl implements TaskRepository {
   @override
   Future<Either<Failure, Unit>> addTask(Tasks task) async {
     try {
-      await remoteDataSource.addTask(task);
+      await remoteDataSource.addTask(task.toModel());
       return const Right(unit);
     } catch (e) {
       return Left(
@@ -60,11 +60,11 @@ class TaskRepositorisImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, Tasks>> searchTask(int taskId) async {
+  Future<Either<Failure, Tasks>>? searchTask(int taskId) async {
     networkInfo.isConnected;
     try {
       final task = await remoteDataSource.searchTask(taskId);
-      return Right(task);
+      return Right(task!);
     } catch (e) {
       return Left(
           TaskFailure(message: 'Failed to search task', type: e.runtimeType));
@@ -72,16 +72,9 @@ class TaskRepositorisImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> editTask(
-    Tasks task,
-    String title,
-    String description,
-    DateTime dueDate,
-    bool status,
-  ) async {
+  Future<Either<Failure, Unit>> editTask(Tasks task) async {
     try {
-      await remoteDataSource.editTask(
-          task, title, description, dueDate, status);
+      await remoteDataSource.editTask(task.toModel());
       return const Right(unit);
     } catch (e) {
       return Left(
@@ -92,7 +85,7 @@ class TaskRepositorisImpl implements TaskRepository {
   @override
   Future<Either<Failure, Unit>> delete(Tasks task) async {
     try {
-      await remoteDataSource.delete(task);
+      await remoteDataSource.delete(task.toModel());
       return const Right(unit);
     } catch (e) {
       return Left(
@@ -103,7 +96,7 @@ class TaskRepositorisImpl implements TaskRepository {
   @override
   Future<Either<Failure, Unit>> markComplete(Tasks task) async {
     try {
-      await remoteDataSource.delete(task);
+      await remoteDataSource.delete(task.toModel());
       return const Right(unit);
     } catch (e) {
       return Left(TaskFailure(
