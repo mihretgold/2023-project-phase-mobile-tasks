@@ -103,6 +103,8 @@ This project is a Todo Mobile app.
      
      }
    ```
+    
+   ![Screenshot (700)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/3212c7f8-911d-4ffc-bb56-66b08361d4fb)
 
 ## Update Flutter Task 9 Part 2: TDD and Clean Architecture (Network Info) 
  1) Create the NetworkInfo Class
