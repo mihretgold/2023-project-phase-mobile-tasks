@@ -101,6 +101,7 @@ class _NewTaskState extends State<NewTask> {
                     lines: 1,
                     controller: _taskNameController,
                     setDate: false,
+                    add: true,
                   ),
                   const SizedBox(
                     height: 15,
@@ -115,6 +116,7 @@ class _NewTaskState extends State<NewTask> {
                     lines: 1,
                     controller: _taskDateController,
                     setDate: true,
+                    add: true,
                   ),
                   const SizedBox(
                     height: 45,
@@ -128,6 +130,7 @@ class _NewTaskState extends State<NewTask> {
                     lines: 2,
                     controller: _taskDescriptionController,
                     setDate: false,
+                    add: true,
                   ),
                   const SizedBox(
                     height: 60,

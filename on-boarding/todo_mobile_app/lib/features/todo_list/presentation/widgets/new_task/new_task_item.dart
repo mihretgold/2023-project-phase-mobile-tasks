@@ -7,6 +7,7 @@ class NewTaskItem extends StatefulWidget {
       required this.lines,
       required this.controller,
       required this.setDate,
+      required this.add,
       Key? key})
       : super(key: key);
 
@@ -14,6 +15,7 @@ class NewTaskItem extends StatefulWidget {
   final int lines;
   final String keys;
   final bool setDate;
+  final bool add;
 
   @override
   State<NewTaskItem> createState() => _NewTaskItemState();
@@ -27,7 +29,7 @@ class _NewTaskItemState extends State<NewTaskItem> {
       // height: 70,
       margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: widget.add ? Colors.white : Color.fromARGB(255, 215, 213, 213),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(

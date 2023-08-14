@@ -43,7 +43,7 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
               keys: "editTitle",
               lines: 1,
               controller: _taskNameController,
-              setDate: false),
+              setDate: false, add: false,),
           const SizedBox(
             height: 12,
           ),
@@ -55,7 +55,8 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
               keys: "editDescription",
               lines: 4,
               controller: _taskDescriptionController,
-              setDate: false),
+              setDate: false,
+              add: false,),
           const SizedBox(
             height: 12,
           ),
@@ -68,7 +69,8 @@ class _TaskDetailFrameState extends State<TaskDetailFrame> {
               keys: "editDate",
               lines: 1,
               controller: _taskDateController,
-              setDate: true),
+              setDate: true,
+              add: false,),
           const SizedBox(
             height: 30,
           ),

@@ -5,8 +5,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:todo_mobile_app/core/network/network_info.dart';
 import 'network_info_test.mocks.dart';
 
-// class MockInternetConnectionChecker extends Mock
-//     implements InternetConnectionChecker {}
 
 @GenerateMocks([InternetConnectionChecker])
 void main() {

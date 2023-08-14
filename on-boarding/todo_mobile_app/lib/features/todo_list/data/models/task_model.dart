@@ -31,7 +31,7 @@ class TaskModel extends Tasks {
       'id': id,
       'title': title,
       'description': description,
-      'dueDate': dueDate,
+      'dueDate': dueDate.toIso8601String(),
       'status': status
     };
   }

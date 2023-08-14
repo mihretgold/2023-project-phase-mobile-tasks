@@ -4,8 +4,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart'
+import 'package:todo_mobile_app/features/todo_list/data/models/task_model.dart'
     as _i2;
+import 'package:todo_mobile_app/features/todo_list/domain/entities/tasks.dart'
+    as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,10 +30,20 @@ class _FakeDateTime_0 extends _i1.SmartFake implements DateTime {
         );
 }
 
+class _FakeTaskModel_1 extends _i1.SmartFake implements _i2.TaskModel {
+  _FakeTaskModel_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [Tasks].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTasks extends _i1.Mock implements _i2.Tasks {
+class MockTasks extends _i1.Mock implements _i3.Tasks {
   MockTasks() {
     _i1.throwOnMissingStub(this);
   }
@@ -69,4 +81,18 @@ class MockTasks extends _i1.Mock implements _i2.Tasks {
         Invocation.getter(#props),
         returnValue: <Object?>[],
       ) as List<Object?>);
+  @override
+  _i2.TaskModel toModel() => (super.noSuchMethod(
+        Invocation.method(
+          #toModel,
+          [],
+        ),
+        returnValue: _FakeTaskModel_1(
+          this,
+          Invocation.method(
+            #toModel,
+            [],
+          ),
+        ),
+      ) as _i2.TaskModel);
 }

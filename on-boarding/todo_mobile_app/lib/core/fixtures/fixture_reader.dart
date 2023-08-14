@@ -1,6 +1,6 @@
 import 'dart:io';
 
-String fixture(String name) =>
-    File('lib/core/fixtures/$name').readAsStringSync();
+Future<String> fixture(String name) async =>   
+ await File('lib/core/fixtures/$name').readAsString();
 
-void fixtureWrite(String name, String contents) => File('lib/core/fixtures/$name').writeAsString(contents, flush: true);
+Future<void> fixtureWrite(String name, String contents) async => await File('lib/core/fixtures/$name').writeAsString(contents, flush: true);

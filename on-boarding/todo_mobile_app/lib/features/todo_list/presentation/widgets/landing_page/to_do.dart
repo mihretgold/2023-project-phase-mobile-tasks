@@ -37,6 +37,7 @@ class _ToDoState extends State<ToDo> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF0C8CE9),
+                    foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5))),
                 onPressed: onTap,
