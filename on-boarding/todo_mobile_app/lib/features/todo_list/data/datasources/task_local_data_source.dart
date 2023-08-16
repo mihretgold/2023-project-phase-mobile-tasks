@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 abstract class TaskLocalDataSource {
-  Future<Tasks>? getLastTask();
+  Future<TaskModel>? getLastTask();
   Future<void>? cacheTask(TaskModel task);
 }
 
@@ -17,7 +17,7 @@ class TaskLocalDataSourceImpl implements TaskLocalDataSource {
   TaskLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<Tasks>? getLastTask() {
+  Future<TaskModel>? getLastTask() {
     final jsonString = sharedPreferences.getString(CACHED_TASK);
 
     if (jsonString != null) {

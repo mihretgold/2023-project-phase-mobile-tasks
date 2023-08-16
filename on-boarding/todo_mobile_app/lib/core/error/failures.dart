@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 abstract class Failure extends Equatable {
+  const Failure([List properties = const <dynamic>[]]);
+}
+
+class TaskFailure extends Failure {
+  const TaskFailure({required this.message, required this.type});
   final String message;
   final Type type;
-
-  const Failure({required this.message, required this.type});
 
   @override
   List<Object?> get props => [message, type];
@@ -13,15 +16,12 @@ abstract class Failure extends Equatable {
   bool get stringify => true;
 }
 
-class TaskFailure extends Failure {
-  const TaskFailure({required String message, required Type type})
-      : super(message: message, type: type);
-}
 class ServerFailure extends Failure {
-  const ServerFailure({required String message, required Type type})
-      : super(message: message, type: type);
+  @override
+  List<Object?> get props => [];
 }
+
 class CacheFailure extends Failure {
-  const CacheFailure({required String message, required Type type})
-      : super(message: message, type: type);
+  @override
+  List<Object?> get props => [];
 }

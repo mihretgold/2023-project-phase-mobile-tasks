@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:todo_mobile_app/core/error/exceptions.dart';
 import 'package:todo_mobile_app/core/network/network_info.dart';
 import 'package:todo_mobile_app/features/todo_list/data/datasources/task_local_data_source.dart';
 import 'package:todo_mobile_app/features/todo_list/data/datasources/task_remote_data_source.dart';
@@ -61,13 +62,21 @@ class TaskRepositorisImpl implements TaskRepository {
 
   @override
   Future<Either<Failure, Tasks>>? searchTask(int taskId) async {
-    networkInfo.isConnected;
-    try {
-      final task = await remoteDataSource.searchTask(taskId);
-      return Right(task!);
-    } catch (e) {
-      return Left(
-          TaskFailure(message: 'Failed to search task', type: e.runtimeType));
+    if (await networkInfo.isConnected ?? false) {
+      try {
+        final task = await remoteDataSource.searchTask(taskId);
+        localDataSource.cacheTask(task!);
+        return Right(task);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final task = await localDataSource.getLastTask();
+        return Right(task!);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
     }
   }
 
