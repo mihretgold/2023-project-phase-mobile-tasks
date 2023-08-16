@@ -9,9 +9,219 @@ This project is a Todo Mobile app.
 | ---------------------- | ---------------------- |
 | ![task_detail1](ScreenShots/task_detail1.png) | ![task_detail2](ScreenShots/task_detail2.png)|
 
+## Update Flutter Task 11 Part 1: Bloc State Management (Bloc Scaffolding)
+- Task Event
+  ```dart
+    
+   part of 'task_bloc.dart';
+   
+   sealed class TaskEvent extends Equatable {
+     const TaskEvent();
+   
+     @override
+     List<Object?> get props => [];
+   }
+   
+   class GetTaskByIdEvent extends TaskEvent{
+     final int id;
+    
+   
+     const GetTaskByIdEvent(this.id);
+   
+     @override
+     List<Object?> get props => [id];
+   }
+   
+   class AddTaskEvent extends TaskEvent{
+   
+     final String id;
+     final String title;
+     final String description;
+     final String dueDate;
+     final bool status;
+   
+     const AddTaskEvent({required this.id, required this.title, required this.description, required this.dueDate, required this.status});
+     
+     @override
+     List<Object?> get props => [id, title, description, dueDate, status];
+   }
+   
+   class GetAllFromTask extends TaskEvent{}
+   
+   class GetCompletedFromTask extends TaskEvent{}
+   
+   class GetPendingFromTask extends TaskEvent{}
+   
+   class EditTaskEvent extends TaskEvent{
+     final String id;
+     final String title;
+     final String description;
+     final String dueDate;
+     final bool status;
+   
+     const EditTaskEvent({required this.id, required this.title, required this.description, required this.dueDate, required this.status});
+     
+     @override
+     List<Object?> get props => [id, title, description, dueDate, status];
+   }
+   
+   class DeleteTaskEvent extends TaskEvent{
+     final String id;
+   
+     const DeleteTaskEvent(this.id);
+   
+     @override
+   
+     List<Object?> get props => [id];
+   
+   }
+   
+  ```
+- Task State
+  ```dart
+       part of 'task_bloc.dart';
+    
+    sealed class TaskState extends Equatable {
+      const TaskState();
+      
+      @override
+      List<Object> get props => [];
+    }
+    
+    class TaskEmpty extends TaskState {}
+    
+    class TaskLoading extends TaskState {}
+    
+    class TaskLoaded extends TaskState {
+      final Tasks task;
+    
+      const TaskLoaded({required this.task});
+    
+      @override
+      List<Object> get props => [task];
+    }
+    
+    class TaskAllLoaded extends TaskState {
+      final List<Tasks> tasks;
+    
+      const TaskAllLoaded({required this.tasks});
+      @override
+      List<Object> get props => [tasks];
+    }
+    
+    class AddState extends TaskState{
+      final List<Tasks> tasks;
+    
+      const AddState({required this.tasks});
+    
+      @override
+      List<Object> get props => [tasks];
+    }
+    
+    class EditState extends TaskState{
+      final List<Tasks> tasks;
+    
+      const EditState({required this.tasks});
+    
+      @override
+      List<Object> get props => [tasks];
+    }
+    
+    class DeleteState extends TaskState{
+      final List<Tasks> tasks;
+    
+      const DeleteState({required this.tasks});
+    
+      @override
+      List<Object> get props => [tasks];
+    }
+    
+    class Error extends TaskState{
+      final String message;
+    
+      const Error({required this.message});
+    
+      @override
+      List<Object> get props => [message];
+    }
+
+  ```
+- InputConverter
+  ```dart
+   class InputConverter {
+    Either<Failure, int> stringToUnsignedInteget(String str){
+      try{
+        final integer = int.parse(str);
+        if( integer < 0) throw const FormatException();
+        return Right(integer);
+      } on FormatException{
+        return Left(InvalidInputFailure());
+      }
+    }
+  }
+  
+  class InvalidInputFailure extends Failure{
+    @override
+    List<Object?> get props => [];
+  
+  }
+  ```
+- InputConverter Test
+  ```dart
+   void main(){
+      late InputConverter inputConverter;
+    
+      setUp(() {
+        inputConverter = InputConverter();
+      });
+    
+      group('stringToUnsignedInt', () { 
+        test('shoud return an integer when the string reperesents an unsigned integer', () {
+          // arrange
+    
+          const str = "123";
+          // act
+          final result = inputConverter.stringToUnsignedInteget(str);
+    
+          // assert
+          expect(result, const Right(123));
+    
+        });
+        test('shoud return a failure when the string is not an integer', () {
+          // arrange
+    
+          const str = "abc";
+          // act
+          final result = inputConverter.stringToUnsignedInteget(str);
+    
+          // assert
+          expect(result, Left(InvalidInputFailure()));
+    
+        });
+    
+        test('shoud return a failure when the string is a negetive integer', () {
+          // arrange
+    
+          const str = "-123";
+          // act
+          final result = inputConverter.stringToUnsignedInteget(str);
+    
+          // assert
+          expect(result, Left(InvalidInputFailure()));
+        });
+    
+       
+      });
+    }
+    
+
+  ```
+![Screenshot (701)](https://github.com/mihretgold/2023-project-phase-mobile-tasks/assets/102969913/45b8853b-dac6-43ee-a87c-e91f2de07732)
+
+
 ## Update Flutter Task 10 Part 1: TDD and Clean Architecture (Local DataSource) 
  1) Implement the Local Data Source Class
-    ```
+    ```dart
       const CACHED_TASK = 'CACHED_TASK';
       
       class TaskLocalDataSourceImpl implements TaskLocalDataSource {
